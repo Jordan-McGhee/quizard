@@ -45,8 +45,14 @@ def logout(request):
 # HOME PAGE
 
 def dashboard(request):
-    pass
+    if 'user_id' not in request.session:
+        return redirect('/')
 
+    context = {
+        "user": User.objects.get(id=request.session['user_id'])
+    }
+
+    return render(request, "dashboard.html", context)
 
 # PROFILE PAGE
 def user_page(request,username):

@@ -31,28 +31,3 @@ urlpatterns = [
     path('quizard/quizzes/<int:quiz_id>/flashcard/<int:flashcard_id>/update', views.update_flashcard),
     path('quizard/quizzes/<int:quiz_id>/flashcard/<int:flashcard_id>/destroy', views.delete_flashcard)
 ]
-
-
-
-
-
-# urlpatterns = [
-#     path('', views.index),
-#     path('register', views.create_user),
-#     path('login',views.log_in),
-#     path('logoff',views.log_out),
-
-#     path('dashboard',views.dashboard),
-#     path(‘quizzes/new’, views.create_quiz),
-#     path(‘quizzes/<int:id>’, views.this_quiz),
-#     path(‘quizzes/<int:id>/like’, views.like_quiz),
-#     path(‘quizzes/<int:id>/dislike’, views.dislike_quiz),
-#     path(‘quizzes/<int:id>/update’, views.update_quiz),
-#     path(‘quizzes/<int:id>/destroy’, views.delete_quiz),
-#     path(‘quizzes/<int:id>/flashcard/new’, views.create_flashcard),
-#     path(‘quizzes/<int:id>/flashcard/update’, views.update_flashcard),
-#     path(‘quizzes/<int:id>/flashcard/destroy’, views.delete_flashcard),
-#     path(‘pages/<int:id>’, views.user_page),
-#     path(‘pages/<int:id>/picture’, views.update_user_picture),
-#     path(‘pages/<int:id>/destroy’, views.delete_account),
-# ]
