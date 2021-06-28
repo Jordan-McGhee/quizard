@@ -106,6 +106,7 @@ class User(models.Model):
     # created_quizzes > created_by in quiz class
     # liked_quizzes > liked_by in quiz class
     # disliked_quizzes > disliked_by in quiz class
+    # quizzes_taken > taken_by in quiz class
 
     objects = UserManager()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -132,6 +133,7 @@ class Quiz(models.Model):
     created_by = models.ForeignKey(User, related_name="created_quizzes", on_delete=models.SET_NULL)
     liked_by = models.ManyToManyField(User, related_name="liked_quizzes", blank=True)
     disliked_by = models.ManyToManyField(User, related_name="disliked_quizzes", blank=True)
+    taken_by = models.ManyToManyField(User, related_name="quizzes_taken", blank=True)
     
     # SPACE FOR RELATIONSHIPS
     # questions > quiz from question class
