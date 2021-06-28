@@ -19,7 +19,7 @@ def register(request):
         new_user = User.objects.register(request.POST)
         request.session['user_id'] = new_user.id
 
-        return redirect('/noted')
+        return redirect('/quizard')
 
     return redirect('/')
 
@@ -33,7 +33,7 @@ def login(request):
         user = User.objects.get(email = request.POST['email'])
         request.session['user_id'] = user.id
 
-        return redirect('/noted')
+        return redirect('/quizard')
 
     return redirect('/')
 

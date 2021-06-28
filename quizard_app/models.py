@@ -130,7 +130,7 @@ class Quiz(models.Model):
         ("8", "Social Studies")
     ]
     category = models.CharField(max_length=25, choices=category_choices, default="1")
-    created_by = models.ForeignKey(User, related_name="created_quizzes", on_delete=models.SET_NULL)
+    created_by = models.ForeignKey(User, related_name="created_quizzes", on_delete=models.SET_NULL, null=True)
     liked_by = models.ManyToManyField(User, related_name="liked_quizzes", blank=True)
     disliked_by = models.ManyToManyField(User, related_name="disliked_quizzes", blank=True)
     taken_by = models.ManyToManyField(User, related_name="quizzes_taken", blank=True)
