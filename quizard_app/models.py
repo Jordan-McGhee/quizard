@@ -72,8 +72,8 @@ class QuizManager(models.Manager):
     def validator(self, postData):
         errors = {}
 
-        if len(postData['name']) < 1:
-            errors['name'] = "Quiz must have a name!"
+        if len(postData['quiz_name']) < 1:
+            errors['quiz_name'] = "Quiz must have a name!"
 
         if len(postData['description']) != 0 and len(postData['description']) < 5:
             errors['description'] = "Description has to be longer than 5 characters!"
@@ -143,7 +143,7 @@ class Quiz(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.created_by}/Quiz/{self.name}"
+        return f"{self.created_by}/Quiz/{self.name}/ID/{self.id}"
 
 
 class Question(models.Model):

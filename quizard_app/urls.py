@@ -19,7 +19,8 @@ urlpatterns = [
 
 
     # QUIZZES FUNCTIONS
-    path('quizard/quizzes/new', views.create_quiz),
+    path('quizard/quizzes/new', views.quiz_form),
+    path('quizard/quizzes/create', views.create_quiz),
     path('quizard/quizzes/<int:quiz_id>', views.view_quiz),
     path('quizard/quizzes/<int:quiz_id>/like', views.like_quiz),
     path('quizard/quizzes/<int:quiz_id>/dislike', views.dislike_quiz),
@@ -28,6 +29,7 @@ urlpatterns = [
 
     # FLASHCARDS
     path('quizard/quizzes/<int:quiz_id>/flashcard/new', views.create_flashcard),
+    path('quizard/quizzes/<int:quiz_id>/flashcard/<int:flashcard_id>/edit', views.edit_flashcard),
     path('quizard/quizzes/<int:quiz_id>/flashcard/<int:flashcard_id>/update', views.update_flashcard),
     path('quizard/quizzes/<int:quiz_id>/flashcard/<int:flashcard_id>/destroy', views.delete_flashcard)
 ]

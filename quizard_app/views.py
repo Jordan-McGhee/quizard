@@ -66,11 +66,59 @@ def delete_account(request,username):
 
 
 # QUIZZES
+def quiz_form(request):
+    context = {
+        "category_choices": Quiz.category_choices,
+        "range": range(25)
+    }
+    return render(request, "create_quiz.html", context)
+
 def create_quiz(request):
-    pass
+    if request.method == "POST":
+        user = User.objects.get(id=request.session['user_id'])
+        errors = Quiz.objects.validator(request.POST)
+        
+        if len(errors) > 0:
+            for k, v in errors.items():
+                messages.error(request, v)
+            return redirect(f'/quizard/quizzes/new')
+
+        quiz = Quiz.objects.create(name=request.POST['quiz_name'], description=request.POST['description'], created_by=user, category = request.POST['category'])
+
+        for i in range(1,26):
+            if request.POST[f'entry{i}'] != "":
+                Question.objects.create(
+                    quiz = quiz,
+                    entry=request.POST[f'entry{i}'],
+                    image=request.FILES.get("image"),
+                    answer=request.POST[f'answer{i}']
+                    )
+
+        print(quiz.description)
+
+        return redirect(f'/quizard/quizzes/{quiz.id}')
+
+    return redirect('/quizard')
 
 def view_quiz(request,quiz_id):
-    pass
+    user = User.objects.get(id=request.session['user_id'])
+    quiz = Quiz.objects.get(id=quiz_id)
+
+    # IS A STR NUMBER FROM CATEGORY CHOICES IN MODELS
+    quiz_category = quiz.category
+    # CONVERTS TO NUM AND SUBTRACTS 1 TO GRAB RIGHT INDEX
+    quiz_category_num = int(quiz_category)-1
+    # GRABS WORD FROM TUPLE PAIR TO GIVE US THE CATEGORY NAME FOR THIS QUIZ
+    quiz_category_word = Quiz.category_choices[quiz_category_num][1]
+
+    context = {
+        "user": user,
+        "quiz": quiz,
+        "quiz_category": quiz_category_word
+        # "popularity": len(quiz.liked_by.all)/len(quiz.disliked_by.all)
+    }
+
+    return render(request, "view_quiz.html", context)
 
 def like_quiz(request,quiz_id):
     pass
@@ -86,6 +134,9 @@ def delete_quiz(request,quiz_id):
 
 # FLASHCARDS
 def create_flashcard(request,quiz_id):
+    pass
+
+def edit_flashcard(request,quiz_id,flashcard_id):
     pass
 
 def update_flashcard(request,quiz_id,flashcard_id):

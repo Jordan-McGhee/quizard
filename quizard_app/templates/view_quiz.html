@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    {% load static %}
+</head>
+<body>
+    <div id="wrapper" style="max-width: 1200px; margin: 20px auto; outline: 1px solid black;">
+    
+        <div class="tile is-ancestor">
+
+            <div class="tile is-parent is-4" style="outline: 1px solid red;">
+
+                <div class="tile is-child">
+                    
+                    <p class="title is-2">{{quiz.name}}</p>
+                    <p class="subtitle is-5">Category: {{quiz_category}}</p>
+
+                    <p>Description: {{quiz.description}}</p>
+                    <p>Created By: {{quiz.created_by}}</p>
+                    <p>{{quiz.questions.all|length}} Questions</p>
+                    <p>Popularity: {{popularity}}</p>
+
+                    <!-- LIKE/DISLIKE DIV -->
+                    <div class="field is-grouped">
+                        <form action="/quizard/quizzes/{{quiz.id}}/like" method="POST" style="margin-right: 10px;">
+                            <input type="submit" value="LIKE" class="button">
+                        </form>
+
+                        <form action="/quizard/quizzes/{{quiz.id}}/dislike" method="POST">
+                            <input type="submit" value="DISLIKE" class="button">
+                        </form>
+                    <!-- END LIKE/DISLIKE DIV -->
+                    </div>
+
+                    <!-- USER EDIT/DELETE BUTTONS -->
+                    {% if quiz.created_by == user %}
+                        <div class="field is-grouped">
+                            <a href="/quizard/quizzes/{{quiz.id}}/edit" class="button" style="margin-right: 10px;">Edit Quiz</a>
+
+                            <form action="/quizard/quizzes/{{quiz.id}}/destroy" method="POST">
+                                <input type="submit" value="Delete Quiz" class="button is-danger" onclick="return confirm('Are you sure you want to delete this quiz?');">
+                            </form>
+                        </div>
+                    {% endif %}
+
+                <!-- END CHILD DIV -->
+                </div>
+
+            <!-- END LEFT PARENT TILE DIV -->
+            </div>
+
+            <div class="tile is-parent" style="outline: 1px solid blue;">
+
+                <div class="tile is-child">
+                    <table class="table is-bordered is-fullwidth is-striped">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Question</th>
+                                <th>Answer</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for question in quiz.questions.all %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{question.entry}}</td>
+                                    <td>{{question.answer}}</td>
+                                    <td>
+                                        <div class="field is-grouped">
+                                            <a href="/quizard/quizzes/{{quiz.id}}/flashcard/{{question.id}}/edit" class="button is-small" style="margin-right: 10px;">Edit</a>
+                                            <form action="/quizard/quizzes/{{quiz.id}}/flashcard/{{question.id}}/destroy" method="POST"><input type="submit" value="Delete" class="button is-danger is-small"></form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            <!-- END RIGHT PARENT TILE DIV -->
+            </div>
+
+        <!-- END ANCESTOR DIV -->
+        </div>
+
+    <!-- END WRAPPER DIV -->
+    </div>
+</body>
