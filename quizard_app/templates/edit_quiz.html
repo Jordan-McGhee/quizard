@@ -85,7 +85,7 @@
     </nav>
     <!-- END SPACE FOR NAVBAR -->
     
-    <form action="/quizard/quizzes/create" method="POST" enctype="multipart/form-data">
+    <form action="/quizard/quizzes/update" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         
         <!-- QUIZ NAME AND CATEGORY -->
@@ -93,14 +93,20 @@
         
             <div class="field">
                 <label for="quiz_name" class="label">Quiz Name</label>
-                <input type="text" placeholder="Quiz Name" class="input" name="quiz_name">
+                <input type="text" value="{{quiz.name}}" class="input" name="quiz_name">
             </div>
             <div class="field">
                 <label for="category" class="label">Category</label>
                 <select name="category" class="select">
-                    <option value="-" selected>--</option>
                     {% for choice in category_choices %}
+                        
+                        <!-- !!!!FIX THIS!!!! -->
+                        {% if choice == quiz.category %}
+                        <option value="{{choice.0}}" selected>{{choice.1}}</option>
+                        {% else %}
                         <option value="{{choice.0}}">{{choice.1}}</option>
+                        {% endif %}
+
                     {% endfor %}
                 </select>
             </div>
@@ -110,37 +116,46 @@
         <!-- QUIZ DESCRIPTION -->
         <div class="field">
             <label for="description" class="label">Description</label>
-            <textarea name="description" placeholder="OPTIONAL" class="textarea"></textarea>
+
+            {% if quiz.description %}
+                <textarea name="description" class="textarea">{{quiz.description}}</textarea>
+            {% else %}
+                <textarea name="description" class="textarea" placeholder="OPTIONAL"></textarea>
+            {% endif %}
+
         </div>
 
         <p class="title is-6">QUESTIONS</p>
 
-        {% for i in range %}
+        {% for question in quiz.questions.all %}
+
             <div class="field is-grouped is-justify-content-space-between is-align-items-center">
                 <!-- ENTRY -->
                 <div class="field">
                     <label for="entry{{forloop.counter}}" class="label">Question {{forloop.counter}}</label>
-                    <input type="text" class="input" placeholder="Question #{{forloop.counter}}" name="entry{{forloop.counter}}">
+                    <input type="text" class="input" value="{{question.entry}}" name="entry{{forloop.counter}}">
                 </div>
 
-                <!-- ENTRY IMAGE -->
-                <div class="field">
-                    <label for="image" class="label">Add Image?</label>
-                    <input type="file" name="image" class="file">
-                </div>
+                {% if question.image %}
+                    <!-- FIIIIXXXXXXX -->
+                    <!-- ENTRY IMAGE -->
+                    <div class="field">
+                        <label for="image" class="label">Change Image?</label>
+                        <input type="file" name="image" class="file">
+                    </div>
+                {% endif %}
 
                 <!-- ANSWER -->
                 <div class="field">
                     <label for="answer{{forloop.counter}}" class="label">Answer {{forloop.counter}}</label>
-                    <input type="text" class="input" placeholder="Answer #{{forloop.counter}}" name="answer{{forloop.counter}}">
+                    <input type="text" class="input" value="{{question.answer}}" name="answer{{forloop.counter}}">
                 </div>
 
             </div>
+
         {% endfor %}
 
-
-
-        <input type="submit" value="Create Quiz" class="button">
+        <input type="submit" value="Update Quiz" class="button">
     </form>
 
 

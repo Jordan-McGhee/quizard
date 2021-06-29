@@ -23,6 +23,7 @@
 nav {
     margin: 20px auto;
     padding: 10px;
+    border-bottom: 1px solid black;
     /* outline: 1px solid black; */
 }
 

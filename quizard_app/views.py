@@ -126,11 +126,29 @@ def like_quiz(request,quiz_id):
 def dislike_quiz(request,quiz_id):
     pass
 
+def edit_quiz(request,quiz_id):
+
+    context = {
+        "quiz": Quiz.objects.get(id=quiz_id),
+        "user": User.objects.get(id=request.session['user_id']),
+        "category_choices": Quiz.category_choices,
+        "range": range(25)
+    }
+
+    return render(request, "edit_quiz.html", context)
+
 def update_quiz(request,quiz_id):
     pass
 
 def delete_quiz(request,quiz_id):
-    pass
+    if request.method == "POST":
+        user = User.objects.get(id=request.session['user_id'])
+        quiz = Quiz.objects.get(id=quiz_id)
+        quiz.delete()
+
+        return redirect(f"/quizard/user/{user.username}")
+    
+    return redirect(f"/quizard/quizzes/{quiz_id}")
 
 # FLASHCARDS
 def create_flashcard(request,quiz_id):
@@ -143,4 +161,8 @@ def update_flashcard(request,quiz_id,flashcard_id):
     pass
 
 def delete_flashcard(request,quiz_id,flashcard_id):
-    pass
+    if request.method == "POST":
+        flashcard = Question.objects.get(id=flashcard_id)
+        flashcard.delete()
+
+    return redirect(f"/quizard/quizzes/{quiz_id}")

@@ -24,6 +24,7 @@ urlpatterns = [
     path('quizard/quizzes/<int:quiz_id>', views.view_quiz),
     path('quizard/quizzes/<int:quiz_id>/like', views.like_quiz),
     path('quizard/quizzes/<int:quiz_id>/dislike', views.dislike_quiz),
+    path('quizard/quizzes/<int:quiz_id>/edit', views.edit_quiz),
     path('quizard/quizzes/<int:quiz_id>/update', views.update_quiz),
     path('quizard/quizzes/<int:quiz_id>/destroy', views.delete_quiz),
 
