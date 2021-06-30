@@ -16,7 +16,7 @@
             <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
                     <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
-                    <p class="title is-2 is-align-self-center" id="wtf"><a href="#">Quizard</a></p>
+                    <p class="title is-2 is-align-self-center" id="wtf"><a href="/quizard">Quizard</a></p>
 
                     <!-- BURGER MENU -->
                     <a role="button" class="navbar-burger is-align-self-center" id="wtf" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -41,32 +41,32 @@
                     Create
                 </a>
 
-                <!-- WORKOUTS DROPDOWN-->
+                <!-- QUIZZES DROPDOWN-->
                 <div class="navbar-item has-dropdown is-hoverable">
 
-                    <!-- WORKOUTS MAIN LINK -->
-                    <a href="" class="navbar-link">
-                        Workouts
+                    <!-- QUIZZES MAIN LINK -->
+                    <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-link">
+                        Quizzes
                     </a>
 
-                    <!-- WORKOUTS DROPDOWN ITEMS -->
+                    <!-- QUIZZES DROPDOWN ITEMS -->
                     <div class="navbar-dropdown">
 
-                        <!-- YOUR WORKOUTS -->
-                        <a href="" class="navbar-item">
-                            Your Workouts
+                        <!-- YOUR QUIZZES -->
+                        <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
+                            Your Quizzes
                         </a>
                         
                         <hr class="navbar-divider">
 
-                        <!-- CREATE A WORKOUT -->
-                        <a href="" class="navbar-item">
-                            Create A Workout
+                        <!-- QUIZZES YOU LIKE -->
+                        <a href="#" class="navbar-item">
+                            Quizzes You Like
                         </a>
 
-                        <!-- END WORKOUT DROPDOWN MENU -->
+                        <!-- END QUIZZES DROPDOWN MENU -->
                     </div>
-                    <!-- END WORKOUT ITEM -->
+                    <!-- END QUIZZES ITEM -->
                 </div>
 
                 <!-- LOGOUT -->
@@ -98,6 +98,20 @@
 
                     <!-- !!!!!NEED TO FIX THIS!!!!! -->
                     <p>Popularity: {{popularity}}</p>
+
+                    <p>Liked by:</p>
+                    <ul>
+                        {% for user in quiz.liked_by.all %}
+                            <li>{{user.username}}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <p>Disliked by:</p>
+                    <ul>
+                        {% for user in quiz.disliked_by.all %}
+                            <li>{{user.username}}</li>
+                        {% endfor %}
+                    </ul>
 
                     <!-- LIKE/DISLIKE DIV -->
                     <div class="field is-grouped">

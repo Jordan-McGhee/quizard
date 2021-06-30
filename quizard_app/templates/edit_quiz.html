@@ -17,7 +17,7 @@
         <!-- LEFT SIDE OF NAVBAR -->
         <div class="navbar-brand">
                 <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
-                <p class="title is-2 is-align-self-center" id="wtf"><a href="#">Quizard</a></p>
+                <p class="title is-2 is-align-self-center" id="wtf"><a href="/quizard">Quizard</a></p>
 
                 <!-- BURGER MENU -->
                 <a role="button" class="navbar-burger is-align-self-center" id="wtf" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -42,32 +42,32 @@
                 Create
             </a>
 
-            <!-- WORKOUTS DROPDOWN-->
+            <!-- QUIZZES DROPDOWN-->
             <div class="navbar-item has-dropdown is-hoverable">
 
-                <!-- WORKOUTS MAIN LINK -->
-                <a href="" class="navbar-link">
-                    Workouts
+                <!-- QUIZZES MAIN LINK -->
+                <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-link">
+                    Quizzes
                 </a>
 
-                <!-- WORKOUTS DROPDOWN ITEMS -->
+                <!-- QUIZZES DROPDOWN ITEMS -->
                 <div class="navbar-dropdown">
 
-                    <!-- YOUR WORKOUTS -->
-                    <a href="" class="navbar-item">
-                        Your Workouts
+                    <!-- YOUR QUIZZES -->
+                    <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
+                        Your Quizzes
                     </a>
                     
                     <hr class="navbar-divider">
 
-                    <!-- CREATE A WORKOUT -->
-                    <a href="" class="navbar-item">
-                        Create A Workout
+                    <!-- QUIZZES YOU LIKE -->
+                    <a href="#" class="navbar-item">
+                        Quizzes You Like
                     </a>
 
-                    <!-- END WORKOUT DROPDOWN MENU -->
+                    <!-- END QUIZZES DROPDOWN MENU -->
                 </div>
-                <!-- END WORKOUT ITEM -->
+                <!-- END QUIZZES ITEM -->
             </div>
 
             <!-- LOGOUT -->
@@ -85,7 +85,7 @@
     </nav>
     <!-- END SPACE FOR NAVBAR -->
     
-    <form action="/quizard/quizzes/update" method="POST" enctype="multipart/form-data">
+    <form action="/quizard/quizzes/{{quiz.id}}/update" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         
         <!-- QUIZ NAME AND CATEGORY -->
@@ -95,13 +95,12 @@
                 <label for="quiz_name" class="label">Quiz Name</label>
                 <input type="text" value="{{quiz.name}}" class="input" name="quiz_name">
             </div>
-            <div class="field">
+            <div class="field" style="margin-left: 10px;">
                 <label for="category" class="label">Category</label>
-                <select name="category" class="select">
+                <select name="category" class="select is-normal">
                     {% for choice in category_choices %}
                         
-                        <!-- !!!!FIX THIS!!!! -->
-                        {% if choice == quiz.category %}
+                        {% if choice.1 == quiz_category %}
                         <option value="{{choice.0}}" selected>{{choice.1}}</option>
                         {% else %}
                         <option value="{{choice.0}}">{{choice.1}}</option>
@@ -127,33 +126,38 @@
 
         <p class="title is-6">QUESTIONS</p>
 
-        {% for question in quiz.questions.all %}
+        <div id="questions" style="padding: 10px; max-height: 800px; overflow: scroll;">
+            {% for question in quiz.questions.all %}
 
-            <div class="field is-grouped is-justify-content-space-between is-align-items-center">
-                <!-- ENTRY -->
-                <div class="field">
-                    <label for="entry{{forloop.counter}}" class="label">Question {{forloop.counter}}</label>
-                    <input type="text" class="input" value="{{question.entry}}" name="entry{{forloop.counter}}">
-                </div>
-
-                {% if question.image %}
-                    <!-- FIIIIXXXXXXX -->
-                    <!-- ENTRY IMAGE -->
-                    <div class="field">
-                        <label for="image" class="label">Change Image?</label>
-                        <input type="file" name="image" class="file">
+                <div class="field is-grouped is-justify-content-space-between is-align-items-center">
+                    <!-- ENTRY -->
+                    <div class="field control is-expanded">
+                        <label for="entry{{forloop.counter}}" class="label">Question {{forloop.counter}}</label>
+                        <input type="text" class="input" value="{{question.entry}}" name="entry{{forloop.counter}}">
                     </div>
-                {% endif %}
 
-                <!-- ANSWER -->
-                <div class="field">
-                    <label for="answer{{forloop.counter}}" class="label">Answer {{forloop.counter}}</label>
-                    <input type="text" class="input" value="{{question.answer}}" name="answer{{forloop.counter}}">
+                    {% if question.image %}
+                        <!-- FIIIIXXXXXXX -->
+                        <!-- NEED TO DISPLAY ORIGINAL IMAGE? -->
+                        <!-- ENTRY IMAGE -->
+                        <div class="field">
+                            <label for="image{{forloop.counter}}" class="label">Change Image?</label>
+                            <input type="file" name="image{{forloop.counter}}" class="file">
+                        </div>
+                    {% endif %}
+
+                    <!-- ANSWER -->
+                    <div class="field">
+                        <label for="answer{{forloop.counter}}" class="label">Answer {{forloop.counter}}</label>
+                        <input type="text" class="input" value="{{question.answer}}" name="answer{{forloop.counter}}">
+                    </div>
+
                 </div>
 
-            </div>
-
-        {% endfor %}
+            {% endfor %}
+        
+        <!-- END QUESTIONS DIV -->
+        </div>
 
         <input type="submit" value="Update Quiz" class="button">
     </form>

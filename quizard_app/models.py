@@ -84,10 +84,10 @@ class QuestionManager(models.Manager):
     def validator(self, postData):
         errors = {}
 
-        if len(postData['entry']) < 1:
+        if len(postData['entry']) < 1 and len(postData['answer']) != 0:
             errors['entry'] = "The prompt can't be empty!"
 
-        if len(postData['answer']) < 1:
+        if len(postData['answer']) < 1 and len(postData['entry']) != 0:
             errors['answer'] = "Question must have an answer!"
 
 

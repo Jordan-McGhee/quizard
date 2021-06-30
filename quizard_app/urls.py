@@ -14,6 +14,11 @@ urlpatterns = [
 
     # PROFILE PAGE FUNCTIONS
     path('quizard/user/<str:username>', views.user_page),
+
+    # DELETE ONCE PROJECT IS MERGED! PLACEHOLDER TO VIEW ALL QUIZZES UNTIL USER PAGE IS RUNNING
+    path('quizard/user/<str:username>/quizzes', views.user_quizzes),
+    # ^^^^^^^^^^
+
     path('quizard/user/<str:username>/update', views.update_user),
     path('quizard/user/<str:username>/destroy', views.delete_account),
 

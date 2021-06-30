@@ -58,6 +58,18 @@ def dashboard(request):
 def user_page(request,username):
     pass
 
+# DELETE ONCE PROJECT IS MERGED! PLACEHOLDER TO VIEW ALL QUIZZES UNTIL USER PAGE IS RUNNING
+def user_quizzes(request,username):
+    user = User.objects.get(id=request.session['user_id'])
+
+    context = {
+        "user": user,
+        "user_quizzes": user.created_quizzes.all()
+    }
+
+    return render(request, "quizzes_list.html", context)
+# ^^^^^^^^^^^^^^^
+
 def update_user(request,username):
     pass
 
@@ -69,6 +81,7 @@ def delete_account(request,username):
 def quiz_form(request):
     context = {
         "category_choices": Quiz.category_choices,
+        "user": User.objects.get(id=request.session['user_id']),
         "range": range(25)
     }
     return render(request, "create_quiz.html", context)
@@ -90,7 +103,7 @@ def create_quiz(request):
                 Question.objects.create(
                     quiz = quiz,
                     entry=request.POST[f'entry{i}'],
-                    image=request.FILES.get("image"),
+                    image=request.FILES.get(f"image{i}"),
                     answer=request.POST[f'answer{i}']
                     )
 
@@ -114,23 +127,62 @@ def view_quiz(request,quiz_id):
     context = {
         "user": user,
         "quiz": quiz,
-        "quiz_category": quiz_category_word
+        "quiz_category": quiz_category_word,
+        "category_choices": Quiz.category_choices,
         # "popularity": len(quiz.liked_by.all)/len(quiz.disliked_by.all)
     }
 
     return render(request, "view_quiz.html", context)
 
 def like_quiz(request,quiz_id):
-    pass
+    if request.method == "POST":
+        user = User.objects.get(id=request.session['user_id'])
+        quiz = Quiz.objects.get(id=quiz_id)
+
+        if user in quiz.liked_by.all():
+            quiz.liked_by.remove(user)
+        
+        elif user in quiz.disliked_by.all():
+            quiz.disliked_by.remove(user)
+            quiz.liked_by.add(user)
+
+        else:
+            quiz.liked_by.add(user)
+
+    return redirect(f'/quizard/quizzes/{quiz_id}')
 
 def dislike_quiz(request,quiz_id):
-    pass
+    if request.method == "POST":
+        user = User.objects.get(id=request.session['user_id'])
+        quiz = Quiz.objects.get(id=quiz_id)
+
+        if user in quiz.disliked_by.all():
+            quiz.disliked_by.remove(user)
+        
+        elif user in quiz.liked_by.all():
+            quiz.liked_by.remove(user)
+            quiz.disliked_by.add(user)
+
+        else:
+            quiz.disliked_by.add(user)
+
+    return redirect(f'/quizard/quizzes/{quiz_id}')
 
 def edit_quiz(request,quiz_id):
+    user = User.objects.get(id=request.session['user_id'])
+    quiz = Quiz.objects.get(id=quiz_id)
+
+    # IS A STR NUMBER FROM CATEGORY CHOICES IN MODELS
+    quiz_category = quiz.category
+    # CONVERTS TO NUM AND SUBTRACTS 1 TO GRAB RIGHT INDEX
+    quiz_category_num = int(quiz_category)-1
+    # GRABS WORD FROM TUPLE PAIR TO GIVE US THE CATEGORY NAME FOR THIS QUIZ
+    quiz_category_word = Quiz.category_choices[quiz_category_num][1]
 
     context = {
-        "quiz": Quiz.objects.get(id=quiz_id),
-        "user": User.objects.get(id=request.session['user_id']),
+        "user": user,
+        "quiz": quiz,
+        "quiz_category": quiz_category_word,
         "category_choices": Quiz.category_choices,
         "range": range(25)
     }
@@ -138,7 +190,35 @@ def edit_quiz(request,quiz_id):
     return render(request, "edit_quiz.html", context)
 
 def update_quiz(request,quiz_id):
-    pass
+    if request.method == "POST":
+        errors = Quiz.objects.validator(request.POST)
+        print(errors)
+        if len(errors) > 0:
+            for k, v in errors.items():
+                messages.error(request, v)
+
+            return redirect(f'/quizard/quizzes/{quiz_id}/edit')
+
+        user = User.objects.get(id=request.session['user_id'])
+        quiz = Quiz.objects.get(id=quiz_id)
+
+        # QUIZ UPDATE
+        quiz.name = request.POST['quiz_name']
+        quiz.description = request.POST['description']
+        quiz.category = request.POST['category']
+
+        # QUESTIONS UPDATE
+        for i,question in enumerate(quiz.questions.all()):
+            
+            question.entry = request.POST[f'entry{i+1}']
+            question.answer = request.POST[f'answer{i+1}']
+            question.image = request.FILES.get(f"image{i+1}") or question.image
+
+            question.save()
+
+        quiz.save()
+    
+    return redirect(f"/quizard/quizzes/{quiz_id}")
 
 def delete_quiz(request,quiz_id):
     if request.method == "POST":
@@ -146,7 +226,7 @@ def delete_quiz(request,quiz_id):
         quiz = Quiz.objects.get(id=quiz_id)
         quiz.delete()
 
-        return redirect(f"/quizard/user/{user.username}")
+        return redirect(f"/quizard/user/{user.username}/quizzes")
     
     return redirect(f"/quizard/quizzes/{quiz_id}")
 
