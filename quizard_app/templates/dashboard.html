@@ -84,8 +84,9 @@
         </nav>
 
         <h1>Hello, {{user.username}}<a href="/quizard/sort_category"> Category</a></h1>
-        <table>
+        <table class="table is-bordered is-fullwidth is-striped">
             <thead>
+                <th><h2>No.</h2></th>
                 <th><h2>Quiz</h2></th>
                 <th><h2>category</h2></th>
                 <th><h2>description</h2></th>
@@ -94,9 +95,10 @@
 
             {% for quiz in all_quizzes%}
             <tr>
-                <td>{{quiz.name}}</a></td>
-                <td>{{quiz.category}}</a></td>
-                <td>{{quiz.description}}</a></td>
+                <td>{{forloop.counter}}</td>
+                <td><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
+                <td>{{quiz.get_category_display}}</td>
+                <td>{{quiz.description}}</td>
             </tr>
             {% endfor %}
         </table>
