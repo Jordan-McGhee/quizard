@@ -61,7 +61,7 @@ def sort_category(request):
 
     context = {
         "user": User.objects.get(id=request.session['user_id']),
-        "all_quizzes": Quiz.objects.order_by('category')
+        "all_quizzes": Quiz.objects.filter(category = request.POST['category_choices'])
     }
 
     return render(request, "dashboard.html", context)
@@ -78,6 +78,7 @@ def user_page(request,username):
         'this_user': this_user,
         'created_quizzes' : Quiz.objects.filter(created_by = this_user),
         'liked_quizzes': Quiz.objects.filter(liked_by = this_user),
+        'quizzes_taken': Quiz.objects.filter(taken_by = this_user),
 
     }
     return render(request,'profile.html',context)
@@ -266,6 +267,7 @@ def delete_quiz(request,quiz_id):
 def take_quiz(request,quiz_id):
     quiz = Quiz.objects.get(id = quiz_id)
     user = User.objects.get(id=request.session['user_id'])
+    quiz.taken_by.add(user)
 
     context = {
         'quiz': quiz,
