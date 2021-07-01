@@ -10,6 +10,7 @@ urlpatterns = [
 
     # HOME PAGE FUNCTIONS
     path('quizard', views.dashboard),
+    path('quizard/sort_category', views.sort_category),
 
 
     # PROFILE PAGE FUNCTIONS

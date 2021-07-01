@@ -49,10 +49,24 @@ def dashboard(request):
         return redirect('/')
 
     context = {
-        "user": User.objects.get(id=request.session['user_id'])
+        "user": User.objects.get(id=request.session['user_id']),
+        "all_quizzes": Quiz.objects.all()
     }
 
     return render(request, "dashboard.html", context)
+
+def sort_category(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+
+    context = {
+        "user": User.objects.get(id=request.session['user_id']),
+        "all_quizzes": Quiz.objects.order_by('category')
+    }
+
+    return render(request, "dashboard.html", context)
+
+
 
 # PROFILE PAGE
 def user_page(request,username):
