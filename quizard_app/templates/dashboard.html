@@ -83,8 +83,23 @@
 
         </nav>
 
-        <h1>Hello, {{user.username}}</h1>
+        <h1>Hello, {{user.username}}<a href="/quizard/sort_category"> Category</a></h1>
+        <table>
+            <thead>
+                <th><h2>Quiz</h2></th>
+                <th><h2>category</h2></th>
+                <th><h2>description</h2></th>
 
+            </thead>
+
+            {% for quiz in all_quizzes%}
+            <tr>
+                <td>{{quiz.name}}</a></td>
+                <td>{{quiz.category}}</a></td>
+                <td>{{quiz.description}}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
 
 
 
