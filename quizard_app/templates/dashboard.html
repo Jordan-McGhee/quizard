@@ -119,6 +119,7 @@
                 <th>
                     <h2>description</h2>
                 </th>
+                <th>Go take this Quiz</th>
 
             </thead>
 
@@ -128,6 +129,8 @@
                 <td><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
                 <td>{{quiz.get_category_display}}</td>
                 <td>{{quiz.description}}</td>
+                <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Take this quiz</a></td>
+
             </tr>
             {% endfor %}
         </table>

@@ -114,10 +114,27 @@
             </div>
         </form>
         {% endif %}
-
-
         <hr>
-        <h2>quizzes created by {{this_user.first_name}}{{thiis_user.last_name}}</h2>
+        <h2>Quizzes {{this_user.first_name}}{{thiis_user.last_name}} has attended </h2>
+        <table class="table  is-fullwidth is-hoverable">
+            <thead>
+                <th>Quiz Name</th>
+                <th>Category</th>
+                <th>Times taken</th>
+                <th>Go take this Quiz</th>
+            </thead>
+            <tbody>
+                {% for quiz in quizzes_taken reversed %}
+                <tr>
+                    <td>{{quiz.name}} </td>
+                    <td>{{quiz.get_category_display}}</td>
+                    <td>{{quiz.taken_by.count}}</td>
+                    <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Take this quiz</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Quizzes created by {{this_user.first_name}}{{thiis_user.last_name}}</h2>
 
 
         <table class="table  is-fullwidth is-hoverable">
