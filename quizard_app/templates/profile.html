@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    {% load static %}
+</head>
+
+<body>
+    <div id="wrapper" style="max-width: 1000px; margin: 20px auto;">
+
+        <!-- SPACE FOR NAVBAR -->
+        <nav class="navbar" style="border-bottom: 1px solid black; margin-bottom: 10px;">
+
+            <!-- LEFT SIDE OF NAVBAR -->
+            <div class="navbar-brand">
+                <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
+                <p class="title is-2 is-align-self-center" id="wtf"><a href="/quizard">Quizard</a></p>
+
+                <!-- BURGER MENU -->
+                <a role="button" class="navbar-burger is-align-self-center" id="wtf" aria-label="menu"
+                    aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+
+                <!-- LEFT SIDE OF NAVBAR END -->
+            </div>
+
+            <!-- RIGHT SIDE OF NAVBAR -->
+            <div class="navbar-menu navbar-end">
+
+                <!-- PROFILE -->
+                <a href="/quizard/user/{{user.username}}" class="navbar-item">
+                    {{user.username}}
+                </a>
+
+                <!-- FRIENDS -->
+                <a href="/quizard/quizzes/new" class="navbar-item">
+                    Create
+                </a>
+
+                <!-- QUIZZES DROPDOWN-->
+                <div class="navbar-item has-dropdown is-hoverable">
+
+                    <!-- QUIZZES MAIN LINK -->
+                    <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-link">
+                        Quizzes
+                    </a>
+
+                    <!-- QUIZZES DROPDOWN ITEMS -->
+                    <div class="navbar-dropdown">
+
+                        <!-- YOUR QUIZZES -->
+                        <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
+                            Your Quizzes
+                        </a>
+
+                        <hr class="navbar-divider">
+
+                        <!-- QUIZZES YOU LIKE -->
+                        <a href="#" class="navbar-item">
+                            Quizzes You Like
+                        </a>
+
+                        <!-- END QUIZZES DROPDOWN MENU -->
+                    </div>
+                    <!-- END QUIZZES ITEM -->
+                </div>
+
+                <!-- LOGOUT -->
+                <div class="navbar-item">
+                    <form action="/logout" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="LOGOUT" class="button" id="logout">
+                    </form>
+                </div>
+
+
+                <!-- END RIGHT SIDE OF NAV -->
+            </div>
+
+        </nav>
+        <!-- END SPACE FOR NAVBAR -->
+
+
+
+        <img src="/media/{{this_user.profile_photo}}" height="auto" width="10%" alt="{{this_user.username}}_photo">
+        <!-- <p>{{this_user.username}}</p> -->
+        <p>{{this_user.first_name}}{{this_user.last_name}}</p>
+        <p><a class="button is-info" href="/quizard/quizzes/new">Create a new quiz</a></p>
+
+
+        <h4>Quizzes taken</h4>
+        <p>{{this_user.quizzes_taken.count}}</p>
+        <p>
+            <!--if current user is the creator of this page, then he can update a user profile_photo here-->
+            {% if this_user.id == request.session.user_id %}
+        <h5>Upload a user photo here</h5>
+        <form action="/quizard/user/{{this_user.username}}/update" method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <input type="file" name="user_img">
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="update" type="button" class="button is-info">
+                <a href="/quizard/user/{{this_user.username}}" type="button" class="button is-info">Cancel</a> <a class="button is-info"
+                    href="/quizard/user/{{this_user.username}}/destroy">Delete Account</a>
+            </div>
+        </form>
+        {% endif %}
+
+
+        <hr>
+        <h2>quizzes created by {{this_user.first_name}}{{thiis_user.last_name}}</h2>
+
+
+        <table class="table  is-fullwidth is-hoverable">
+            <thead>
+                <th>Quiz Name</th>
+                <th>Category</th>
+                <th>Times taken</th>
+                <th>Go take this Quiz</th>
+            </thead>
+            <tbody>
+                {% for quiz in created_quizzes.all reversed %}
+                <tr>
+                    <td>{{quiz.name}} </td>
+                    <td>{{quiz.get_category_display}}</td>
+                    <td>{{quiz.taken_by.count}}</td>
+                    <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Take this quiz</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+     
+        <h2>{{this_user.first_name}}'s favorite quizzes are</h2>
+        <table class="table  is-fullwidth is-hoverable">
+            <thead>
+                <th>Quiz Name</th>
+                <th>Category</th>
+                <th>Times taken</th>
+            </thead>
+            <tbody>
+                {% for quiz in liked_quizzes.all reversed %}
+                <tr>
+                    <td>{{quiz.name}} </td>
+                    <td>{{quiz.get_category_display}}</td>
+                    <td>{{quiz.taken_by.count}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</body>
+
+</html>

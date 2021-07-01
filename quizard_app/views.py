@@ -56,7 +56,17 @@ def dashboard(request):
 
 # PROFILE PAGE
 def user_page(request,username):
-    pass
+    if 'user_id' not in request.session:
+        return redirect("/")
+    this_user = User.objects.get(username = username)
+
+    context = {
+        'this_user': this_user,
+        'created_quizzes' : Quiz.objects.filter(created_by = this_user),
+        'liked_quizzes': Quiz.objects.filter(liked_by = this_user),
+
+    }
+    return render(request,'profile.html',context)
 
 # DELETE ONCE PROJECT IS MERGED! PLACEHOLDER TO VIEW ALL QUIZZES UNTIL USER PAGE IS RUNNING
 def user_quizzes(request,username):
@@ -71,10 +81,19 @@ def user_quizzes(request,username):
 # ^^^^^^^^^^^^^^^
 
 def update_user(request,username):
-    pass
+    if request.method == 'POST':
+        this_user = User.objects.get(username = username)
+        this_user.profile_photo = request.FILES.get('user_img') or this_user.profile_photo
+        this_user.save()
+        return redirect(f'/quizard/user/{username}')
+    return redirect('/')
 
 def delete_account(request,username):
-    pass
+    if 'user_id' not in request.session:
+        return redirect("/")
+    user_to_delete = User.objects.get(username = username)
+    user_to_delete.delete()
+    return redirect('/')
 
 
 # QUIZZES
@@ -229,6 +248,51 @@ def delete_quiz(request,quiz_id):
         return redirect(f"/quizard/user/{user.username}/quizzes")
     
     return redirect(f"/quizard/quizzes/{quiz_id}")
+
+def take_quiz(request,quiz_id):
+    quiz = Quiz.objects.get(id = quiz_id)
+    user = User.objects.get(id=request.session['user_id'])
+
+    context = {
+        'quiz': quiz,
+        'user': user,
+    }
+
+    return render(request, 'take_quiz.html',context)
+
+def mark_quiz(request,quiz_id):
+
+    if request.method == 'POST':
+
+        quiz = Quiz.objects.get(id = quiz_id)
+        print(f"quiz: {quiz.name}")
+        count = 0
+        
+        for i,question in enumerate(quiz.questions.all()):
+            if question.answer == request.POST[f'question{i+1}']:
+                count += 1
+            print(f"Question: {question.entry}")
+            print(f"Answer: {question.answer}")
+            print(f'Entered answer: {request.POST[f"question{i+1}"]}') 
+
+        context = {
+        'quiz':quiz,
+        'score': count,
+
+        }
+
+        return render(request, 'take_quiz.html',context)
+    return redirect(f'/quizard/quizzes/{quiz_id}/take_quiz')
+
+    #     print(i.answer)
+    #     if i.answer == request.POST['question']:
+    #         count = count + 1
+    #     return count
+    # context = {
+    #     'quiz':quiz,
+    #     'score': count,
+    # }
+    # return render(request, 'take_quiz.html',context)
 
 # FLASHCARDS
 def create_flashcard(request,quiz_id):

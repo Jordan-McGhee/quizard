@@ -32,6 +32,8 @@ urlpatterns = [
     path('quizard/quizzes/<int:quiz_id>/edit', views.edit_quiz),
     path('quizard/quizzes/<int:quiz_id>/update', views.update_quiz),
     path('quizard/quizzes/<int:quiz_id>/destroy', views.delete_quiz),
+    path('quizard/quizzes/<int:quiz_id>/take_quiz',views.take_quiz),
+    path('quizard/quizzes/<int:quiz_id>/mark_quiz',views.mark_quiz),
 
     # FLASHCARDS
     path('quizard/quizzes/<int:quiz_id>/flashcard/new', views.create_flashcard),

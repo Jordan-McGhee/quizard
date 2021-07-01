@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taking a quiz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    {% load static %}
+</head>
+
+<body>
+    <div id="wrapper" style="max-width: 1000px; margin: 20px auto;">
+
+        <!-- SPACE FOR NAVBAR -->
+        <nav class="navbar" style="border-bottom: 1px solid black; margin-bottom: 10px;">
+
+            <!-- LEFT SIDE OF NAVBAR -->
+            <div class="navbar-brand">
+                <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
+                <p class="title is-2 is-align-self-center" id="wtf"><a href="/quizard">Quizard</a></p>
+
+                <!-- BURGER MENU -->
+                <a role="button" class="navbar-burger is-align-self-center" id="wtf" aria-label="menu"
+                    aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+
+                <!-- LEFT SIDE OF NAVBAR END -->
+            </div>
+
+            <!-- RIGHT SIDE OF NAVBAR -->
+            <div class="navbar-menu navbar-end">
+
+                <!-- PROFILE -->
+                <a href="/quizard/user/{{user.username}}" class="navbar-item">
+                    {{user.username}}
+                </a>
+
+                <!-- FRIENDS -->
+                <a href="/quizard/quizzes/new" class="navbar-item">
+                    Create
+                </a>
+
+                <!-- QUIZZES DROPDOWN-->
+                <div class="navbar-item has-dropdown is-hoverable">
+
+                    <!-- QUIZZES MAIN LINK -->
+                    <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-link">
+                        Quizzes
+                    </a>
+
+                    <!-- QUIZZES DROPDOWN ITEMS -->
+                    <div class="navbar-dropdown">
+
+                        <!-- YOUR QUIZZES -->
+                        <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
+                            Your Quizzes
+                        </a>
+
+                        <hr class="navbar-divider">
+
+                        <!-- QUIZZES YOU LIKE -->
+                        <a href="#" class="navbar-item">
+                            Quizzes You Like
+                        </a>
+
+                        <!-- END QUIZZES DROPDOWN MENU -->
+                    </div>
+                    <!-- END QUIZZES ITEM -->
+                </div>
+
+                <!-- LOGOUT -->
+                <div class="navbar-item">
+                    <form action="/logout" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="LOGOUT" class="button" id="logout">
+                    </form>
+                </div>
+
+
+                <!-- END RIGHT SIDE OF NAV -->
+            </div>
+
+        </nav>
+        <!-- END SPACE FOR NAVBAR -->
+
+        <h2>{{quiz.name}}</h2>
+        <label for="mark" name="mark">Score: {{score}}</label>
+        <table class="table">
+            <thead>
+                <th>Question Number</th>
+                <th>Question content</th>
+                <th>Your input</th>
+            </thead>
+            <tbody>
+                <form action="/quizard/quizzes/{{quiz.id}}/mark_quiz" method='POST'>
+                    {% csrf_token %}
+
+                    {% for question in quiz.questions.all %}
+                    <tr>
+                        <td>{{forloop.counter}} </td>
+                        <td> {{question.entry}} </td>
+                        <td><input type="text" name="question{{forloop.counter}}"></td>
+                    </tr>
+                    {% endfor %}
+                    <input type="submit" value="Submit">
+                </form>
+            </tbody>
+        </table>
+       
+        <h3>User info: {{user.first_name}}{{user.last_name}}</h3>
+
+    </div>
+</body>
+
+</html>
