@@ -61,7 +61,7 @@ def sort_category(request):
 
     context = {
         "user": User.objects.get(id=request.session['user_id']),
-        "all_quizzes": Quiz.objects.order_by('category')
+        "all_quizzes": Quiz.objects.filter(category = request.POST['category_choices'])
     }
 
     return render(request, "dashboard.html", context)

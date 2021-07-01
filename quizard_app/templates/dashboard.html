@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     {% load static %}
 </head>
+
 <body>
     <div id="wrapper" style="max-width: 1000px; margin: 20px auto;">
 
@@ -15,17 +17,18 @@
 
             <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
-                    <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
-                    <p class="title is-2 is-align-self-center" id="wtf"><a href="/quizard">Quizard</a></p>
+                <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
+                <p class="title is-2 is-align-self-center" id="wtf"><a href="/quizard">Quizard</a></p>
 
-                    <!-- BURGER MENU -->
-                    <a role="button" class="navbar-burger is-align-self-center" id="wtf" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
+                <!-- BURGER MENU -->
+                <a role="button" class="navbar-burger is-align-self-center" id="wtf" aria-label="menu"
+                    aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
 
-            <!-- LEFT SIDE OF NAVBAR END -->
+                <!-- LEFT SIDE OF NAVBAR END -->
             </div>
 
             <!-- RIGHT SIDE OF NAVBAR -->
@@ -56,7 +59,7 @@
                         <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
                             Your Quizzes
                         </a>
-                        
+
                         <hr class="navbar-divider">
 
                         <!-- QUIZZES YOU LIKE -->
@@ -77,23 +80,49 @@
                     </form>
                 </div>
 
-            
-            <!-- END RIGHT SIDE OF NAV -->
+
+                <!-- END RIGHT SIDE OF NAV -->
             </div>
 
         </nav>
 
-        <h1>Hello, {{user.username}}<a href="/quizard/sort_category"> Category</a></h1>
+        <h1>Hello, {{user.username}}</h1>
+        <form action="/quizard/sort_category" method='POST'>
+            {% csrf_token %}
+            <label for="category_choices"></label>
+            <select name="category_choices">
+                <option selected>Select a category...</option>
+                <option value="1">Fun</option>
+                <option value="2">Geography</option>
+                <option value="3">Language</option>
+                <option value="4">Literature</option>
+                <option value="5">Math</option>
+                <option value="6">Miscellaneous</option>
+                <option value="7">Science</option>
+                <option value="8">Social Studies</option>
+            </select>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+
         <table class="table is-bordered is-fullwidth is-striped">
             <thead>
-                <th><h2>No.</h2></th>
-                <th><h2>Quiz</h2></th>
-                <th><h2>category</h2></th>
-                <th><h2>description</h2></th>
+                <th>
+                    <h2>No.</h2>
+                </th>
+                <th>
+                    <h2>Quiz</h2>
+                </th>
+                <th>
+                    <h2>category</h2>
+                </th>
+                <th>
+                    <h2>description</h2>
+                </th>
 
             </thead>
 
-            {% for quiz in all_quizzes%}
+            {% for quiz in all_quizzes %}
             <tr>
                 <td>{{forloop.counter}}</td>
                 <td><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
@@ -109,4 +138,5 @@
 
     </div>
 </body>
+
 </html>
