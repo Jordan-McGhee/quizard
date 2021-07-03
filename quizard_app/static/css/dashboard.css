@@ -34,12 +34,12 @@ body{
     margin-top:10px;
     height:80px;
     width:80px;
+    border-radius: 50%;
 }
 
 #user-picture:hover{
     filter: drop-shadow(0.10rem 0 0.85rem rgb(255, 255, 255));
 }
-
 
 .navbar-item, .navbar-link{
     color:white;
