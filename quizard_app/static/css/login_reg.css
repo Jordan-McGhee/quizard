@@ -4,12 +4,17 @@
     font-family: 'Inconsolata', monospace;
 }
 
+body{
+    background:url(https://i.imgur.com/CwBxkGK.png);
+}
+
 #wrapper {
     width: 80%;
     margin: auto;
 }
 
 #stars{
+    background: fit-content;
     background: url(https://i.imgur.com/CwBxkGK.png);
     position:absolute;
     top: 0;
