@@ -30,6 +30,17 @@ body{
     height:100px;
 }
 
+#user-picture{
+    margin-top:10px;
+    height:80px;
+    width:80px;
+}
+
+#user-picture:hover{
+    filter: drop-shadow(0.10rem 0 0.85rem rgb(255, 255, 255));
+}
+
+
 .navbar-item, .navbar-link{
     color:white;
     font-size:20px;
