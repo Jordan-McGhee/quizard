@@ -201,7 +201,7 @@
 
                 <!-- END CHILD DIV -->
                     {% if quiz.created_by != user %}
-                    <p id="creator"> quiz by @{{quiz.created_by}}<br> {{quiz.created_at}}</p>
+                    <p id="creator"> quiz by @<a href="/quizard/user/{{quiz.created_by}}">{{quiz.created_by}}</a><br> {{quiz.created_at}}</p>
                     {% endif %}
                 </div>
 
