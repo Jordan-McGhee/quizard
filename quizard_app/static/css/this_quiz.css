@@ -108,7 +108,8 @@ p, li{
 }
 
 p{
-    margin-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #quiz-title, #quiz-category{

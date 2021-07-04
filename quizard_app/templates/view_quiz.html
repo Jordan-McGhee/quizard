@@ -129,20 +129,18 @@
                     <!-- !!!!!NEED TO FIX THIS!!!!! -->
                     <span>Popularity: </span> <p> {{popularity}}</p>
 
-                    <span>Liked by:</span>
-                    <ul>
+                    <span>Liked By:</span> <br>
+                    
                         {% for user in quiz.liked_by.all %}
-                            <li>{{user.username}}</li>
+                            <p>{{user.username}}<p>
                         {% endfor %}
-                    </ul>
 
-                    <span>Disliked by:</span>
-                    <ul>
+
+                    <span>Disliked By:</span> <br>
+
                         {% for user in quiz.disliked_by.all %}
-                            <li>{{user.username}}</li>
+                            <p>{{user.username}}</p>
                         {% endfor %}
-                    </ul>
-
                 </div>
 
             <!-- END LEFT PARENT TILE DIV -->
