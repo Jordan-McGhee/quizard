@@ -132,14 +132,14 @@
                     <span>Liked By:</span> <br>
                     
                         {% for user in quiz.liked_by.all %}
-                            <p>{{user.username}}<p>
+                            <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a><p>
                         {% endfor %}
 
 
                     <span>Disliked By:</span> <br>
 
                         {% for user in quiz.disliked_by.all %}
-                            <p>{{user.username}}</p>
+                            <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a></p>
                         {% endfor %}
                 </div>
 
