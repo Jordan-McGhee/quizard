@@ -39,6 +39,7 @@ body{
     border-radius: 50%;
     filter: drop-shadow(0.50rem 0 0.35rem rgb(255, 255, 255));
     margin-right:10px;
+    margin-left:10px;
 }
 
 #user-picture:hover{
