@@ -32,24 +32,11 @@ body{
     height:100px;
 }
 
-#user-picture{
-    margin-top:10px;
-    height:80px;
-    width:80px;
-    border-radius: 50%;
-    filter: drop-shadow(0.50rem 0 0.35rem rgb(255, 255, 255));
-    margin-right:10px;
-    margin-left:10px;
-}
-
-#user-picture:hover{
-    opacity:.5;
-}
-
 #user-pic1{
-    height:100px;
-    width: 100px;
+    height:150px;
+    width: 150px;
     border-radius:50%;
+    display:inline;
 }
 
 .navbar-item, .navbar-link{
@@ -67,7 +54,7 @@ body{
 }
 
 .button{
-    border: 1px rgb(74, 74, 74);
+    border-style:none;
     background-color:rgb(255, 255, 255);
     font-family: 'Inconsolata', monospace;
     color:rgb(0, 0, 0);
@@ -81,51 +68,72 @@ body{
     filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
 }
 
+.user-information{
+    text-align: center;
+    background: url(https://i.imgur.com/ChpMnxD.png);
+    background-color: rgb(46, 46, 46);
+    padding:10px;
+    border: 2px solid rgb(118, 118, 118);
+    margin-bottom:20px;
+}
+
+#update-buttons, #delete-button{
+    background-color: rgb(91, 91, 91);
+    color:white;
+}
+
+#update-buttons:hover{
+    color:black;
+    background-color:rgb(255, 255, 255);
+}
+
+#delete-button:hover{
+    background-color: rgb(255, 1, 1);
+}
+
 table{
-    margin-top:20px;
+    margin-top:2px;
 }
 
 th{
     background: black;
 }
 
-h2{
-    font-weight:bolder;
-    color:white;
-}
-
 tr{
     font-weight:bolder;
 }
 
-span{
-    color:rgb(118, 117, 117);
-    font-weight:bolder;
+h1{
+    color:white;
     font-size:20px;
-}
-
-span:hover{
-    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
-}
-
-p, li{
-    color:white;
-    font-weight: bolder;
-}
-
-p{
-    margin-bottom: 5px;
-}
-
-#quiz-title, #quiz-category{
-    color:white;
     font-weight:bolder;
-}
-
-#quiz-title{
-    text-transform: uppercase;
+    margin-top:15px;
 }
 
 h2{
+    font-weight:bolder;
     color:white;
+}
+
+span{
+    text-transform: uppercase;
+    display:block;
+    color:white;
+    font-size:35px;
+    font-family:'cabin';
+}
+
+p, h4, h5{
+    color:white;
+    font-weight:bolder;
+}
+
+#image-upload{
+    margin-left:100px;
+    padding:10px;
+    background-color:transparent;
+    color:white;
+}
+.quiz-title{
+    text-transform: uppercase;
 }

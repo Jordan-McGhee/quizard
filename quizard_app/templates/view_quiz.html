@@ -113,12 +113,12 @@
 
                             <form action="/quizard/quizzes/{{quiz.id}}/like" method="POST" style="margin-right: 10px;">
                                 {% csrf_token %}
-                                <input type="submit" value="LIKE &#128077;" class="button">
+                                <input type="submit" value="LIKE &#128077;" class="button" id="like-dislike-buttons">
                             </form>
 
                             <form action="/quizard/quizzes/{{quiz.id}}/dislike" method="POST">
                                 {% csrf_token %}
-                                <input type="submit" value="DISLIKE &#128078;" class="button">
+                                <input type="submit" value="DISLIKE &#128078;" class="button" id="like-dislike-buttons">
                             </form>
 
                         </div>

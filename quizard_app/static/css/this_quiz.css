@@ -37,7 +37,6 @@ body{
     height:80px;
     width:80px;
     border-radius: 50%;
-    filter: drop-shadow(0.50rem 0 0.35rem rgb(255, 255, 255));
     margin-right:10px;
     margin-left:10px;
 }
@@ -128,6 +127,16 @@ p{
 
 #quiz-title{
     text-transform: uppercase;
+}
+
+#like-dislike-buttons{
+    background-color: rgb(91, 91, 91);
+    color:white;
+}
+
+#like-dislike-buttons:hover{
+    color:black;
+    background-color:rgb(255, 255, 255);
 }
 
 .description{
