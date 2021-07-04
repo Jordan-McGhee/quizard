@@ -2,28 +2,34 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    {% load static %}
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quizard &#129668;</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Castoro&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
 </head>
 
 <body>
-    <div id="wrapper" style="max-width: 1000px; margin: 20px auto;">
+    <div id="wrapper">
 
         <!-- SPACE FOR NAVBAR -->
-        <nav class="navbar" style="border-bottom: 1px solid black; margin-bottom: 10px;">
+        <nav class="navbar">
 
             <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
                 <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
-                <p class="title is-2 is-align-self-center" id="wtf"><a href="/quizard">Quizard</a></p>
+                <p class="title is-2 is-align-self-center" id="quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></p>
 
                 <!-- BURGER MENU -->
-                <a role="button" class="navbar-burger is-align-self-center" id="wtf" aria-label="menu"
-                    aria-expanded="false" data-target="navbarBasicExample">
+                <a role="button" class="navbar-burger is-align-self-center" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -36,6 +42,8 @@
             <div class="navbar-menu navbar-end">
 
                 <!-- USER -->
+                <img src="/media/{{this_user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture">
+
                 <a href="/quizard/user/{{user.username}}" class="navbar-item">
                     {{user.username}}
                 </a>
@@ -61,14 +69,14 @@
                     <div class="navbar-dropdown">
 
                         <!-- YOUR QUIZZES -->
-                        <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
+                        <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item1">
                             Your Quizzes
                         </a>
 
                         <hr class="navbar-divider">
 
                         <!-- QUIZZES YOU LIKE -->
-                        <a href="#" class="navbar-item">
+                        <a href="#" class="navbar-item1">
                             Quizzes You Like
                         </a>
 
@@ -81,7 +89,7 @@
                 <div class="navbar-item">
                     <form action="/logout" method="POST">
                         {% csrf_token %}
-                        <input type="submit" value="LOGOUT" class="button" id="logout">
+                        <input type="submit" value="LOGOUT" class="button">
                     </form>
                 </div>
 
@@ -94,13 +102,12 @@
 
 
 
-        <img src="/media/{{this_user.profile_photo}}" height="auto" width="10%" alt="{{this_user.username}}_photo">
+        <img src="/media/{{this_user.profile_photo}}" id="user-pic1" alt="{{this_user.username}}_photo">
         <!-- <p>{{this_user.username}}</p> -->
         <p>{{this_user.first_name}}{{this_user.last_name}}</p>
-        <p><a class="button is-info" href="/quizard/quizzes/new">Create a new quiz</a></p>
 
 
-        <h4>Quizzes taken</h4>
+        <h4>Quizzes Taken</h4>
         <p>{{this_user.quizzes_taken.count}}</p>
         <p>
             <!--if current user is the creator of this page, then he can update a user profile_photo here-->
@@ -118,14 +125,14 @@
             </div>
         </form>
         {% endif %}
-        <hr>
-        <h2>Quizzes {{this_user.first_name}}{{thiis_user.last_name}} has attended </h2>
+
+        <h2>Quizzes {{this_user.first_name}}{{thiis_user.last_name}}'s Taken: </h2>
         <table class="table  is-fullwidth is-hoverable">
             <thead>
-                <th>Quiz Name</th>
+                <th>Quiz Title</th>
                 <th>Category</th>
-                <th>Times taken</th>
-                <th>Go take this Quiz</th>
+                <th>Times Taken</th>
+                <th>Take Quiz</th>
             </thead>
             <tbody>
                 {% for quiz in quizzes_taken reversed %}
@@ -138,15 +145,15 @@
                 {% endfor %}
             </tbody>
         </table>
-        <h2>Quizzes created by {{this_user.first_name}}{{thiis_user.last_name}}</h2>
+        <h2>Quizzes Created By {{this_user.first_name}}{{thiis_user.last_name}}:</h2>
 
 
         <table class="table  is-fullwidth is-hoverable">
             <thead>
-                <th>Quiz Name</th>
+                <th>Quiz Title</th>
                 <th>Category</th>
-                <th>Times taken</th>
-                <th>Go take this Quiz</th>
+                <th>Times Taken</th>
+                <th>Take Quiz</th>
             </thead>
             <tbody>
                 {% for quiz in created_quizzes.all reversed %}
@@ -161,13 +168,14 @@
         </table>
 
 
-     
-        <h2>{{this_user.first_name}}'s favorite quizzes are</h2>
+
+        <h2>{{this_user.first_name}}'s Favorite Quizzes:</h2>
         <table class="table  is-fullwidth is-hoverable">
             <thead>
-                <th>Quiz Name</th>
+                <th>Quiz Title</th>
                 <th>Category</th>
-                <th>Times taken</th>
+                <th>Times Taken</th>
+                <th>Take Quiz</th>
             </thead>
             <tbody>
                 {% for quiz in liked_quizzes.all reversed %}
@@ -175,6 +183,7 @@
                     <td>{{quiz.name}} </td>
                     <td>{{quiz.get_category_display}}</td>
                     <td>{{quiz.taken_by.count}}</td>
+                    <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Take this quiz</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

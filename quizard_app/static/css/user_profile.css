@@ -46,6 +46,12 @@ body{
     opacity:.5;
 }
 
+#user-pic1{
+    height:100px;
+    width: 100px;
+    border-radius:50%;
+}
+
 .navbar-item, .navbar-link{
     color:white;
     font-size:20px;
@@ -120,38 +126,6 @@ p{
     text-transform: uppercase;
 }
 
-.description{
-    color:rgb(118, 117, 117);
-    font-size: 25px;
-}
-
-.description:hover{
-    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
-}
-
-#delete-flashcard{
-    border: 1px rgb(74, 74, 74);
-    background-color:rgb(255, 255, 255);
-    font-family: 'Inconsolata', monospace;
-    color:rgb(0, 0, 0);
-    font-weight: bolder;
-    transition: 350ms;
-}
-
-#delete-flashcard:hover{
-    background-color:rgb(0, 0, 0);
-    color: rgb(255, 1, 1);
-}
-
-#delete-quiz{
-    background-color: rgb(255, 1, 1);
-}
-
-#delete-button:hover{
-    background: transparent;
-}
-
-#creator{
-    margin-top:-10px;
-    text-align: end;
+h2{
+    color:white;
 }
