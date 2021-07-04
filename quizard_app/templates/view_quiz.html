@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    {% load static %}
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quizard &#129668;</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Castoro&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/this_quiz.css' %}">
 </head>
-<body>
-    <div id="wrapper" style="max-width: 1200px; margin: 20px auto;">
 
-        <nav class="navbar" style="border-bottom: 1px solid black; margin-bottom: 10px;">
+<body>
+    <div id="wrapper">
+
+        <nav class="navbar">
 
             <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
                     <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
-                    <p class="title is-2 is-align-self-center" id="wtf"><a href="/quizard">Quizard</a></p>
+                    <p class="title is-2 is-align-self-center" id="quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></p>
 
                     <!-- BURGER MENU -->
-                    <a role="button" class="navbar-burger is-align-self-center" id="wtf" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <a role="button" class="navbar-burger is-align-self-center" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
@@ -32,6 +40,8 @@
             <div class="navbar-menu navbar-end">
 
                 <!-- USER -->
+                <img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture">
+
                 <a href="/quizard/user/{{user.username}}" class="navbar-item">
                     {{user.username}}
                 </a>
@@ -58,14 +68,14 @@
                     <div class="navbar-dropdown">
 
                         <!-- YOUR QUIZZES -->
-                        <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
+                        <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item1">
                             Your Quizzes
                         </a>
                         
                         <hr class="navbar-divider">
 
                         <!-- QUIZZES YOU LIKE -->
-                        <a href="#" class="navbar-item">
+                        <a href="#" class="navbar-item1">
                             Quizzes You Like
                         </a>
 
@@ -94,57 +104,45 @@
 
                 <div class="tile is-child">
                     
-                    <p class="title is-2">{{quiz.name}}</p>
-                    <p class="subtitle is-5">Category: {{quiz_category}}</p>
+                    <p class="title is-2" id="quiz-title">{{quiz.name}}</p>
+                    <p class="subtitle is-5" id="quiz-category">Category: {{quiz_category}}</p>
+        
 
-                    <p>Description: {{quiz.description}}</p>
-                    <p>Created By: {{quiz.created_by}}</p>
-                    <p>{{quiz.questions.all|length}} Questions</p>
+                        <!-- LIKE/DISLIKE DIV -->
+                        <div class="field is-grouped">
+
+                            <form action="/quizard/quizzes/{{quiz.id}}/like" method="POST" style="margin-right: 10px;">
+                                {% csrf_token %}
+                                <input type="submit" value="LIKE &#128077;" class="button">
+                            </form>
+
+                            <form action="/quizard/quizzes/{{quiz.id}}/dislike" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" value="DISLIKE &#128078;" class="button">
+                            </form>
+
+                        </div>
+                        <!-- END LIKE/DISLIKE DIV -->
+
+                    <span>Questions:</span><p>{{quiz.questions.all|length}}</p>
 
                     <!-- !!!!!NEED TO FIX THIS!!!!! -->
-                    <p>Popularity: {{popularity}}</p>
+                    <span>Popularity: </span> <p> {{popularity}}</p>
 
-                    <p>Liked by:</p>
+                    <span>Liked by:</span>
                     <ul>
                         {% for user in quiz.liked_by.all %}
                             <li>{{user.username}}</li>
                         {% endfor %}
                     </ul>
 
-                    <p>Disliked by:</p>
+                    <span>Disliked by:</span>
                     <ul>
                         {% for user in quiz.disliked_by.all %}
                             <li>{{user.username}}</li>
                         {% endfor %}
                     </ul>
 
-                    <!-- LIKE/DISLIKE DIV -->
-                    <div class="field is-grouped">
-                        <form action="/quizard/quizzes/{{quiz.id}}/like" method="POST" style="margin-right: 10px;">
-                            {% csrf_token %}
-                            <input type="submit" value="LIKE" class="button">
-                        </form>
-
-                        <form action="/quizard/quizzes/{{quiz.id}}/dislike" method="POST">
-                            {% csrf_token %}
-                            <input type="submit" value="DISLIKE" class="button">
-                        </form>
-                    <!-- END LIKE/DISLIKE DIV -->
-                    </div>
-
-                    <!-- USER EDIT/DELETE BUTTONS -->
-                    {% if quiz.created_by == user %}
-                        <div class="field is-grouped">
-                            <a href="/quizard/quizzes/{{quiz.id}}/edit" class="button" style="margin-right: 10px;">Edit Quiz</a>
-
-                            <form action="/quizard/quizzes/{{quiz.id}}/destroy" method="POST">
-                                {% csrf_token %}
-                                <input type="submit" value="Delete Quiz" class="button is-danger" onclick="return confirm('Are you sure you want to delete this quiz?');">
-                            </form>
-                        </div>
-                    {% endif %}
-
-                <!-- END CHILD DIV -->
                 </div>
 
             <!-- END LEFT PARENT TILE DIV -->
@@ -153,13 +151,15 @@
             <div class="tile is-parent">
 
                 <div class="tile is-child">
+                    <p class="description">Description:</p>
+                    <p id="description">{{quiz.description}}</p>
                     <table class="table is-bordered is-fullwidth is-striped">
                         <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>Question</th>
-                                <th>Answer</th>
-                                <th>Actions</th>
+                                <th><h2>No.</h2></th>
+                                <th><h2>Question</h2></th>
+                                <th><h2>Answer</h2></th>
+                                <th><h2>Actions</h2></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -173,7 +173,7 @@
                                             <a href="/quizard/quizzes/{{quiz.id}}/flashcard/{{question.id}}/edit" class="button is-small" style="margin-right: 10px;">Edit</a>
                                             <form action="/quizard/quizzes/{{quiz.id}}/flashcard/{{question.id}}/destroy" method="POST">
                                                 {% csrf_token %}
-                                                <input type="submit" value="Delete" class="button is-danger is-small" onclick="return confirm('Are you sure you want to delete this flashcard?');">
+                                                <input type="submit" value="Delete" class="button is-danger is-small" id="delete-flashcard" onclick="return confirm('Are you sure you want to delete this flashcard?');">
                                             </form>
                                         </div>
                                     </td>
@@ -181,6 +181,22 @@
                             {% endfor %}
                         </tbody>
                     </table>
+
+
+                    <!-- USER EDIT/DELETE BUTTONS -->
+                    {% if quiz.created_by == user %}
+                        <div class="field is-grouped" id="edit-delete">
+                            <a href="/quizard/quizzes/{{quiz.id}}/edit" class="button" style="margin-right: 10px;">Edit Quiz</a>
+
+                            <form action="/quizard/quizzes/{{quiz.id}}/destroy" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" value="Delete Quiz" class="button is-danger" id="delete-quiz" onclick="return confirm('Are you sure you want to delete this quiz?');">
+                            </form>
+                        </div>
+                    {% endif %}
+
+                <!-- END CHILD DIV -->
+                    <p id="creator"> quiz by @{{quiz.created_by}}<br> {{quiz.created_at}}</p>
                 </div>
 
             <!-- END RIGHT PARENT TILE DIV -->

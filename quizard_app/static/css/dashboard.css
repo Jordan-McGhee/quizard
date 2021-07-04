@@ -17,6 +17,7 @@ body{
 }
 
 #wrapper {
+    padding:10px;
     width: 80%;
     margin: auto;
 }
@@ -38,7 +39,7 @@ body{
 }
 
 #user-picture:hover{
-    filter: drop-shadow(0.10rem 0 0.85rem rgb(255, 255, 255));
+    opacity:.5;
 }
 
 .navbar-item, .navbar-link{
