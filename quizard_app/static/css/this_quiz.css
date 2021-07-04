@@ -97,6 +97,10 @@ span{
     font-size:20px;
 }
 
+span:hover{
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+}
+
 p, li{
     color:white;
     font-weight: bolder;
@@ -113,12 +117,15 @@ p{
 
 #quiz-title{
     text-transform: uppercase;
-    
 }
 
 .description{
     color:rgb(118, 117, 117);
     font-size: 25px;
+}
+
+.description:hover{
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
 }
 
 #delete-flashcard{
