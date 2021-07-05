@@ -101,66 +101,70 @@
         </div>
         <!-- END USER INFORMATION -->
 
-        <h1>Quizzes {{this_user.first_name}}'s Taken: </h1>
-        <table class="table  is-fullwidth is-hoverable">
-            <thead>
-                <th><h2>Quiz Title</h2></th>
-                <th><h2>Category</h2></th>
-                <th><h2>Attempts</h2></th>
-                <th><h2>Take Quiz</h2></th>
-            </thead>
-            <tbody>
-                {% for quiz in quizzes_taken reversed %}
-                <tr>
-                    <td class="quiz-title"><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
-                    <td>{{quiz.get_category_display}}</td>
-                    <td>{{quiz.taken_by.count}}</td>
-                    <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Start Quiz</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <h1>Quizzes Created By {{this_user.first_name}}:</h1>
+
+        <div class ="user-quizzes">
+
+            <h1>Quizzes {{this_user.first_name}}'s Taken: </h1>
+            <table class="table  is-fullwidth is-hoverable">
+                <thead>
+                    <th><h2>Quiz Title</h2></th>
+                    <th><h2>Category</h2></th>
+                    <th><h2>Attempts</h2></th>
+                    <th><h2>Take Quiz</h2></th>
+                </thead>
+                <tbody>
+                    {% for quiz in quizzes_taken reversed %}
+                    <tr>
+                        <td class="quiz-title"><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
+                        <td>{{quiz.get_category_display}}</td>
+                        <td>{{quiz.taken_by.count}}</td>
+                        <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Start Quiz</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h1>Quizzes Created By {{this_user.first_name}}:</h1>
 
 
-        <table class="table  is-fullwidth is-hoverable">
-            <thead>
-                <th><h2>Quiz Title</h2></th>
-                <th><h2>Category</h2></th>
-                <th><h2>Attempts</h2></th>
-                <th><h2>Take Quiz</h2></th>
-            </thead>
-            <tbody>
-                {% for quiz in created_quizzes.all reversed %}
-                <tr>
-                    <td class="quiz-title"><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
-                    <td>{{quiz.get_category_display}}</td>
-                    <td>{{quiz.taken_by.count}}</td>
-                    <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Start Quiz</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            <table class="table  is-fullwidth is-hoverable">
+                <thead>
+                    <th><h2>Quiz Title</h2></th>
+                    <th><h2>Category</h2></th>
+                    <th><h2>Attempts</h2></th>
+                    <th><h2>Take Quiz</h2></th>
+                </thead>
+                <tbody>
+                    {% for quiz in created_quizzes.all reversed %}
+                    <tr>
+                        <td class="quiz-title"><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
+                        <td>{{quiz.get_category_display}}</td>
+                        <td>{{quiz.taken_by.count}}</td>
+                        <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Start Quiz</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-        <h1>{{this_user.first_name}}'s Favorite Quizzes:</h1>
-        <table class="table  is-fullwidth is-hoverable">
-            <thead>
-                <th><h2>Quiz Title</h2></th>
-                <th><h2>Category</h2></th>
-                <th><h2>Attempts</h2></th>
-                <th><h2>Take Quiz</h2></th>
-            </thead>
-            <tbody>
-                {% for quiz in liked_quizzes.all reversed %}
-                <tr>
-                    <td class="quiz-title"><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
-                    <td>{{quiz.get_category_display}}</td>
-                    <td>{{quiz.taken_by.count}}</td>
-                    <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Start Quiz</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            <h1>{{this_user.first_name}}'s Favorite Quizzes:</h1>
+            <table class="table  is-fullwidth is-hoverable">
+                <thead>
+                    <th><h2>Quiz Title</h2></th>
+                    <th><h2>Category</h2></th>
+                    <th><h2>Attempts</h2></th>
+                    <th><h2>Take Quiz</h2></th>
+                </thead>
+                <tbody>
+                    {% for quiz in liked_quizzes.all reversed %}
+                    <tr>
+                        <td class="quiz-title"><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
+                        <td>{{quiz.get_category_display}}</td>
+                        <td>{{quiz.taken_by.count}}</td>
+                        <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Start Quiz</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
     </div>
 </body>

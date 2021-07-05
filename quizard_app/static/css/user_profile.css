@@ -6,6 +6,7 @@
 
 body{
     background:url(https://i.imgur.com/CwBxkGK.png);
+    position:absolute;
     top: 0;
     bottom: 0;
     right: 0;
@@ -20,6 +21,15 @@ body{
     width: 80%;
     margin: auto;
     padding:10px;
+}
+
+::-webkit-scrollbar{
+    width:12px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(transparent,white);
+    border-radius: 6px; 
 }
 
 .navbar{
@@ -102,6 +112,12 @@ body{
     background-color: rgb(255, 1, 1);
 }
 
+.user-quizzes{
+    height:500px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
 table{
     margin-bottom:20px;
 }
@@ -145,6 +161,7 @@ p, h4, h5{
     background-color:transparent;
     color:white;
 }
+
 .quiz-title{
     text-transform: uppercase;
 }
