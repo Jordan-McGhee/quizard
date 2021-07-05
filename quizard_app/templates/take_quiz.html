@@ -18,14 +18,14 @@
 </head>
 
 <body>
+
     <div id="wrapper">
 
-        <!-- SPACE FOR NAVBAR -->
+        <!-- NAVBAR -->
         <nav class="navbar">
 
             <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
-                <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
                 <p class="title is-2 is-align-self-center" id="quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></p>
 
                 <!-- BURGER MENU -->
@@ -69,19 +69,20 @@
                         <input type="submit" value="LOGOUT" class="button">
                     </form>
                 </div>
-
-                <!-- END RIGHT SIDE OF NAV -->
             </div>
+            <!-- END RIGHT SIDE OF NAVBAR -->
 
         </nav>
-        <!-- END SPACE FOR NAVBAR -->
+        <!-- NAVBAR END -->
 
+        <!-- QUIZ -->
         <div class="quiz-information">
             <h2 id="quiz-name">{{quiz.name}}</h2>
             <h2>Recent Score: {{score}} </h2>
             <h2>Attempts: {{quiz.taken_by.count}} </h2>
         </div>
 
+        <!-- QUIZ CAROUSEL -->
         <div class="slideshow-container">
             {% for question in quiz.questions.all %}
 
@@ -91,22 +92,22 @@
                 {% if question.image %}
                     <img src="/media/{{question.image}}" id="question-image"/>
                 {% endif %}
-
+                <!-- QUIZ FORM -->
                 <form action="/quizard/quizzes/{{quiz.id}}/mark_quiz" method='POST'>
                     {% csrf_token %}
                     <p>{{question.entry}}</p>
                     <p><input type="text" name="question{{forloop.counter}}" id="answer-input"></p>
             </div>
             {% endfor %}
-        
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
-
-                    <input type="submit" value="Submit" class="button" id="submit" onclick="return confirm('Are you sure you want to submit your quiz?')">
+        <!-- END QUIZ CAROUSEL -->
+        <input type="submit" value="Submit" class="button" id="submit" onclick="return confirm('Are you sure you want to submit your quiz?')">
                 </form>
+                <!-- END QUIZ FORM -->
         
+        <!-- CAROUSEL JAVASCRIPT -->
             <script>
                 var slideIndex = 1;
                     showSlides(slideIndex);
@@ -135,7 +136,7 @@
                     dots[slideIndex-1].className += " active";
                     }
             </script>
-    
+            <!-- END CAROUSEL JAVASCRIPT -->
     
     </div>
 </body>

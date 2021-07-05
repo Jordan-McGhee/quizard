@@ -18,14 +18,14 @@
 </head>
 
 <body>
+    
     <div id="wrapper">
 
-        <!-- SPACE FOR NAVBAR -->
+        <!-- NAVBAR -->
         <nav class="navbar">
 
             <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
-                <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
                 <p class="title is-2 is-align-self-center" id="quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></p>
 
                 <!-- BURGER MENU -->
@@ -34,9 +34,8 @@
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </a>
-
-                <!-- LEFT SIDE OF NAVBAR END -->
             </div>
+            <!-- LEFT SIDE OF NAVBAR END -->
 
             <!-- RIGHT SIDE OF NAVBAR -->
             <div class="navbar-menu navbar-end">
@@ -68,32 +67,31 @@
                         <input type="submit" value="LOGOUT" class="button">
                     </form>
                 </div>
-
-
-                <!-- END RIGHT SIDE OF NAV -->
             </div>
-
+            <!-- RIGHT SIDE OF NAVBAR END -->
         </nav>
-        <!-- END SPACE FOR NAVBAR -->
+        <!-- NAVBAR END -->
 
         <!-- USER INFORMATION -->
         <div class="user-information">
             <img src="/media/{{this_user.profile_photo}}" id="user-pic1" alt="{{this_user.username}}_photo">
             <span>{{this_user.username}}</span>
-
-
             <h4>Quizzes Taken: {{this_user.quizzes_taken.count}}</h4>
-                <!--if current user is the creator of this page, then he can update a user profile_photo here-->
+
+            <!-- PHOTO UPDATE -->
                 {% if this_user.id == request.session.user_id %}
             <h5>Update Your Profile Picture</h5>
+
             <form action="/quizard/user/{{this_user.username}}/update" method='POST' enctype="multipart/form-data">
                 {% csrf_token %}
+
                 <div class="mb-3">
                     <input type="file" name="user_img" id="image-upload">
                 </div>
+
                 <div class="mb-3">
                     <input type="submit" value="Update" class="button" id="update-buttons"> 
-                    
+
                     <a href="/quizard/user/{{this_user.username}}/destroy" class="button" id="delete-button" onclick="return confirm('Are you sure you want to delete your account?');">Delete Account</a>
                 </div>
             </form>
@@ -101,10 +99,11 @@
         </div>
         <!-- END USER INFORMATION -->
 
-
+        <!-- QUIZZES CONTENT-->
         <div class ="user-quizzes">
 
             <h1>Quizzes {{this_user.first_name}}'s Taken: </h1>
+
             <table class="table  is-fullwidth is-hoverable">
                 <thead>
                     <th><h2>Quiz Title</h2></th>
@@ -123,8 +122,9 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <h1>Quizzes Created By {{this_user.first_name}}:</h1>
 
+
+            <h1>Quizzes Created By {{this_user.first_name}}:</h1>
 
             <table class="table  is-fullwidth is-hoverable">
                 <thead>
@@ -145,7 +145,9 @@
                 </tbody>
             </table>
 
+
             <h1>{{this_user.first_name}}'s Favorite Quizzes:</h1>
+
             <table class="table  is-fullwidth is-hoverable">
                 <thead>
                     <th><h2>Quiz Title</h2></th>
@@ -165,6 +167,7 @@
                 </tbody>
             </table>
         </div>
+        <!-- QUIZZES CONTENT END -->
 
     </div>
 </body>

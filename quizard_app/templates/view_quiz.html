@@ -17,13 +17,14 @@
 </head>
 
 <body>
+
     <div id="wrapper">
 
+        <!-- NAVBAR -->
         <nav class="navbar">
 
             <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
-                    <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
                     <p class="title is-2 is-align-self-center" id="quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></p>
 
                     <!-- BURGER MENU -->
@@ -32,9 +33,8 @@
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                     </a>
-
-            <!-- LEFT SIDE OF NAVBAR END -->
             </div>
+            <!-- LEFT SIDE OF NAVBAR END -->
 
             <!-- RIGHT SIDE OF NAVBAR -->
             <div class="navbar-menu navbar-end">
@@ -47,7 +47,6 @@
                 </a>
 
                 <!-- NAVBAR LINKS -->
-                
                 <a href="/quizard" class="navbar-item">
                     Dashboard
                 </a>
@@ -67,28 +66,24 @@
                         <input type="submit" value="LOGOUT" class="button">
                     </form>
                 </div>
-
-            
-            <!-- END RIGHT SIDE OF NAV -->
             </div>
-
+            <!-- END RIGHT SIDE OF NAV -->
         </nav>
-    
+        <!-- END NAVBAR -->
+
+        <!-- LEFT PARENT TILE -->
         <div class="tile is-ancestor">
-
             <div class="tile is-parent is-3">
-
                 <div class="tile is-child">
-
+                    
+                    <!-- QUIZ INFORMATION LEFT -->
                     <div class = "quiz-information">
 
                         <p class="title is-2" id="quiz-title">{{quiz.name}}</p>
                         <p class="subtitle is-5" id="quiz-category">Category: {{quiz_category}}</p>
             
-
-                            <!-- LIKE/DISLIKE DIV -->
+                            <!-- LIKE & DISLIKE BUTTONS -->
                             <div class="field is-grouped">
-
                                 <form action="/quizard/quizzes/{{quiz.id}}/like" method="POST" style="margin-right: 10px;">
                                     {% csrf_token %}
                                     <input type="submit" value="LIKE &#128077;" class="button" id="like-dislike-buttons">
@@ -98,36 +93,34 @@
                                     {% csrf_token %}
                                     <input type="submit" value="DISLIKE &#128078;" class="button" id="like-dislike-buttons">
                                 </form>
-
                             </div>
-                            <!-- END LIKE/DISLIKE DIV -->
 
-                        <span>Questions:</span><p>{{quiz.questions.all|length}}</p>
+                        <span>Questions:</span>
+                        <p>{{quiz.questions.all|length}}</p>
 
-                        <!-- !!!!!NEED TO FIX THIS!!!!! -->
-                        <span>Popularity: </span> <p> {{popularity}}</p>
+                        <!-- !!!!!! POPULARITY NEEDS TO BE FIXED !!!!!! -->
+                        <span>Popularity: </span> 
+                        <p> {{popularity}}</p>
 
-                        <span>Liked By:</span> <br>
-                        
-                            {% for user in quiz.liked_by.all %}
-                                <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a><p>
-                            {% endfor %}
-
+                        <span>Liked By:</span><br>
+                        {% for user in quiz.liked_by.all %}
+                            <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a><p>
+                        {% endfor %}
 
                         <span>Disliked By:</span> <br>
-
-                            {% for user in quiz.disliked_by.all %}
-                                <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a></p>
-                            {% endfor %}
+                        {% for user in quiz.disliked_by.all %}
+                            <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a></p>
+                        {% endfor %}
                     </div>
+                    <!-- END LEFT QUIZ INFORMATION -->
                 </div>
-
-            <!-- END LEFT PARENT TILE DIV -->
             </div>
+            <!-- END LEFT PARENT TILE -->
 
+            <!-- RIGHT PARENT TILE -->
             <div class="tile is-parent">
-
                 <div class="tile is-child">
+                    <!-- RIGHT QUIZ INFORMATION -->
                     <p class="description">Description:</p>
                     <p id="description">{{quiz.description}}</p>
                     <table class="table is-bordered is-fullwidth is-striped">
@@ -147,6 +140,7 @@
                                     <td>{{forloop.counter}}</td>
                                     <td>{{question.entry}}</td>
                                     <td>{{question.answer}}</td>
+                                    <!-- IF QUIZ CREATOR == USER SIGNED IN, DISPLAY EDIT & DELETE FLASHCARD BUTTONS -->
                                     {% if quiz.created_by == user %}
                                     <td>
                                         <div class="field is-grouped">
@@ -162,9 +156,10 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    <!-- END RIGHT QUIZ INFORMATION -->
 
 
-                    <!-- USER EDIT/DELETE BUTTONS -->
+                    <!-- EDIT & DELETE BUTTONS -->
                     {% if quiz.created_by == user %}
                         <div class="field is-grouped" id="edit-delete">
                             <a href="/quizard/quizzes/{{quiz.id}}/edit" class="button" style="margin-right: 10px;">Edit Quiz</a>
@@ -176,18 +171,17 @@
                         </div>
                     {% endif %}
 
-                <!-- END CHILD DIV -->
+                    <!-- IF QUIZ CREATOR != USER SIGNED IN, DISPLAY CREATOR -->
                     {% if quiz.created_by != user %}
                     <p id="creator"> quiz by @<a href="/quizard/user/{{quiz.created_by}}">{{quiz.created_by}}</a><br> {{quiz.created_at}}</p>
                     {% endif %}
                 </div>
+                <!-- END CHILD DIV -->
 
-            <!-- END RIGHT PARENT TILE DIV -->
             </div>
-
-        <!-- END ANCESTOR DIV -->
+            <!-- END RIGHT PARENT TILE DIV -->
         </div>
+        <!-- END ANCESTOR DIV -->
 
-    <!-- END WRAPPER DIV -->
     </div>
 </body>

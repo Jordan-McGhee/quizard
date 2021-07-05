@@ -22,10 +22,8 @@
     <div id="stars"></div>
     <div id="wrapper">
 
-
+        <!-- NAVBAR -->
         <nav class="navbar">
-
-            <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
                     <div class="title">
                     <span class="title is-2 is-align-self-center"> <img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></span>
@@ -42,12 +40,11 @@
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                     </a>
-
-            <!-- LEFT SIDE OF NAVBAR END -->
-
             </div>
-
         </nav>
+        <!-- NAVBAR END -->
+
+        <!-- ERROR MESSAGES -->
             {% if messages %}
                 <div class="card messages">
                     <header class="card-header" id="error-message">
@@ -61,7 +58,7 @@
                     {% endfor %}
                 </div>
             {% endif %}
-
+        <!-- END ERROR MESSAGES -->
 
         <!-- ANCESTOR TILE -->
         <div class="tile is-ancestor is-justify-content-space-between">
@@ -78,9 +75,8 @@
                         </header>
                         <!-- END CARD TITLE DIV -->
                         </div>
-                <!-- END CHILD FOR REGISTER -->
                 </div>
-
+                <!-- END CHILD FOR REGISTER -->
 
                 <!-- CHILD TILE FOR REGISTER -->
                 <div class="tile is-child">
@@ -122,13 +118,11 @@
 
                         </form>
                     </div>
-
-                <!-- END CHILD TILE FOR REGISTER -->
                 </div>
+                <!-- END CHILD TILE FOR REGISTER -->
 
-
-            <!-- END PARENT TILE FOR REGISTER -->
             </div>
+            <!-- END PARENT TILE FOR REGISTER -->
 
             <!-- PARENT TILE FOR LOGIN -->
             <div class="tile is-parent is-6 is-vertical">
@@ -140,11 +134,10 @@
                         <header class="card-header">
                             <p class="card-header-title">LOGIN</p>
                         </header>
-                        <!-- END CARD TITLE DIV -->
                         </div>
-                <!-- END CHILD FOR LOGIN -->
+                        <!-- END CARD TITLE DIV -->
                 </div>
-
+                <!-- END CHILD FOR LOGIN -->
 
                 <!-- CHILD TILE FOR LOGIN -->
                 <div class="tile is-child">
@@ -166,19 +159,12 @@
 
                         </form>
                     </div>
-                <!-- END CHILD TILE FOR LOGIN -->
                 </div>
+                <!-- END CHILD TILE FOR LOGIN -->
 
-
-            <!-- END PARENT TILE FOR REGISTER -->
-            </div>
-
-
-        <!-- END ANCESTOR TILE -->
         </div>
+        <!-- END ANCESTOR TILE -->
 
-
-    <!-- END WRAPPER DIV -->
     </div>
 </body>
 </html>

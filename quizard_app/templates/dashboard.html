@@ -18,13 +18,14 @@
 </head>
 
 <body>
+
     <div id="wrapper">
 
+        <!-- NAVBAR -->
         <nav class="navbar">
-
+        
             <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
-                <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
                 <p class="title is-2 is-align-self-center" id="quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></p>
 
                 <!-- BURGER MENU -->
@@ -35,8 +36,8 @@
                     <span aria-hidden="true"></span>
                 </a>
 
-                <!-- LEFT SIDE OF NAVBAR END -->
             </div>
+            <!-- LEFT SIDE OF NAVBAR END -->
 
             <!-- RIGHT SIDE OF NAVBAR -->
             <div class="navbar-menu navbar-end">
@@ -61,19 +62,21 @@
                 <div class="navbar-item">
                     <form action="/logout" method="POST">
                         {% csrf_token %}
-                        <input type="submit" value="LOGOUT" class="button">
+                        <input type="submit" value="LOGOUT" class="button" class="navbar-item">
                     </form>
                 </div>
-
-
-                <!-- END RIGHT SIDE OF NAV -->
             </div>
-
         </nav>
+        <!-- NAVBAR END -->
 
+        <!-- CONTENT -->
         <div id="content">
 
-            <h1>Hello, <p class ="name">{{user.username}} </p> </h1>
+            <h1>Hello, 
+                <p class="name"> {{user.username}} </p>
+            </h1>
+
+            <!-- CATEGORY SORTER -->
             <form action="/quizard/sort_category" method='POST'>
                 {% csrf_token %}
                 <label for="category_choices"></label>
@@ -90,23 +93,29 @@
                 </select>
                 <input type="submit" value="Submit" class="button" id="submit">
             </form>
+            <!-- END CATEGORY SORTER -->
 
+            <!-- QUIZZES TABLE  -->
             <table class="table is-bordered is-fullwidth is-striped" id="table">
                 <thead>
                     <th>
                         <h2> No. </h2>
                     </th>
+
                     <th>
                         <h2>Quiz Title </h2>
                     </th>
+
                     <th>
                         <h2>Category </h2>
                     </th>
+
                     <th>
                         <h2> Description </h2>
                     </th>
+
                     <th>
-                    <h2> Take Quiz </h2>
+                        <h2> Take Quiz </h2>
                     </th>
                 </thead>
 
@@ -117,14 +126,13 @@
                     <td>{{quiz.get_category_display}}</td>
                     <td>{{quiz.description}}</td>
                     <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Start Quiz</a></td>
-
                 </tr>
                 {% endfor %}
             </table>
+            <!-- END QUIZZES TABLE -->
         </div>
-
+        <!-- END OF CONTENT -->
 
     </div>
 </body>
-
 </html>
