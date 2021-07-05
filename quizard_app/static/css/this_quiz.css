@@ -118,6 +118,13 @@ p{
     filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
 }
 
+.quiz-information{
+    background: url(https://i.imgur.com/ChpMnxD.png);
+    background-color: rgb(46, 46, 46);
+    padding:10px;
+    border: 2px solid rgb(118, 118, 118);
+}
+
 #quiz-title, #quiz-category{
     color:white;
     font-weight:bolder;

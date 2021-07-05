@@ -79,44 +79,47 @@
             <div class="tile is-parent is-3">
 
                 <div class="tile is-child">
-                    
-                    <p class="title is-2" id="quiz-title">{{quiz.name}}</p>
-                    <p class="subtitle is-5" id="quiz-category">Category: {{quiz_category}}</p>
-        
 
-                        <!-- LIKE/DISLIKE DIV -->
-                        <div class="field is-grouped">
+                    <div class = "quiz-information">
 
-                            <form action="/quizard/quizzes/{{quiz.id}}/like" method="POST" style="margin-right: 10px;">
-                                {% csrf_token %}
-                                <input type="submit" value="LIKE &#128077;" class="button" id="like-dislike-buttons">
-                            </form>
+                        <p class="title is-2" id="quiz-title">{{quiz.name}}</p>
+                        <p class="subtitle is-5" id="quiz-category">Category: {{quiz_category}}</p>
+            
 
-                            <form action="/quizard/quizzes/{{quiz.id}}/dislike" method="POST">
-                                {% csrf_token %}
-                                <input type="submit" value="DISLIKE &#128078;" class="button" id="like-dislike-buttons">
-                            </form>
+                            <!-- LIKE/DISLIKE DIV -->
+                            <div class="field is-grouped">
 
-                        </div>
-                        <!-- END LIKE/DISLIKE DIV -->
+                                <form action="/quizard/quizzes/{{quiz.id}}/like" method="POST" style="margin-right: 10px;">
+                                    {% csrf_token %}
+                                    <input type="submit" value="LIKE &#128077;" class="button" id="like-dislike-buttons">
+                                </form>
 
-                    <span>Questions:</span><p>{{quiz.questions.all|length}}</p>
+                                <form action="/quizard/quizzes/{{quiz.id}}/dislike" method="POST">
+                                    {% csrf_token %}
+                                    <input type="submit" value="DISLIKE &#128078;" class="button" id="like-dislike-buttons">
+                                </form>
 
-                    <!-- !!!!!NEED TO FIX THIS!!!!! -->
-                    <span>Popularity: </span> <p> {{popularity}}</p>
+                            </div>
+                            <!-- END LIKE/DISLIKE DIV -->
 
-                    <span>Liked By:</span> <br>
-                    
-                        {% for user in quiz.liked_by.all %}
-                            <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a><p>
-                        {% endfor %}
+                        <span>Questions:</span><p>{{quiz.questions.all|length}}</p>
+
+                        <!-- !!!!!NEED TO FIX THIS!!!!! -->
+                        <span>Popularity: </span> <p> {{popularity}}</p>
+
+                        <span>Liked By:</span> <br>
+                        
+                            {% for user in quiz.liked_by.all %}
+                                <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a><p>
+                            {% endfor %}
 
 
-                    <span>Disliked By:</span> <br>
+                        <span>Disliked By:</span> <br>
 
-                        {% for user in quiz.disliked_by.all %}
-                            <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a></p>
-                        {% endfor %}
+                            {% for user in quiz.disliked_by.all %}
+                                <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a></p>
+                            {% endfor %}
+                    </div>
                 </div>
 
             <!-- END LEFT PARENT TILE DIV -->
