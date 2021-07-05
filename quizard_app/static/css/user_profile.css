@@ -156,10 +156,11 @@ p, h4, h5{
 }
 
 #image-upload{
-    margin-left:100px;
+    margin-left:40px;
     padding:10px;
     background-color:transparent;
     color:white;
+    font-family: 'Inconsolata', monospace;
 }
 
 .quiz-title{
