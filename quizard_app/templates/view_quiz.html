@@ -71,14 +71,17 @@
         </nav>
         <!-- END NAVBAR -->
 
-        <!-- LEFT PARENT TILE -->
+        <!-- LEFT ANCESTOR TILE -->
         <div class="tile is-ancestor">
+
+            <!-- LEFT PARENT TILE -->
             <div class="tile is-parent is-3">
+
+                <!-- LEFT CHILD TILE -->
                 <div class="tile is-child">
-                    
+
                     <!-- QUIZ INFORMATION LEFT -->
                     <div class = "quiz-information">
-
                         <p class="title is-2" id="quiz-title">{{quiz.name}}</p>
                         <p class="subtitle is-5" id="quiz-category">Category: {{quiz_category}}</p>
             
@@ -114,11 +117,14 @@
                     </div>
                     <!-- END LEFT QUIZ INFORMATION -->
                 </div>
+                <!-- END LEFT CHILD TILE -->
             </div>
             <!-- END LEFT PARENT TILE -->
 
             <!-- RIGHT PARENT TILE -->
             <div class="tile is-parent">
+
+                <!-- RIGHT CHILD TILE -->
                 <div class="tile is-child">
                     <!-- RIGHT QUIZ INFORMATION -->
                     <p class="description">Description:</p>
@@ -158,7 +164,6 @@
                     </table>
                     <!-- END RIGHT QUIZ INFORMATION -->
 
-
                     <!-- EDIT & DELETE BUTTONS -->
                     {% if quiz.created_by == user %}
                         <div class="field is-grouped" id="edit-delete">
@@ -176,12 +181,11 @@
                     <p id="creator"> quiz by @<a href="/quizard/user/{{quiz.created_by}}">{{quiz.created_by}}</a><br> {{quiz.created_at}}</p>
                     {% endif %}
                 </div>
-                <!-- END CHILD DIV -->
-
+                <!-- END RIGHT CHILD TILE -->
             </div>
-            <!-- END RIGHT PARENT TILE DIV -->
+            <!-- END RIGHT PARENT TILE -->
         </div>
-        <!-- END ANCESTOR DIV -->
+        <!-- END ANCESTOR TILE -->
 
     </div>
 </body>
