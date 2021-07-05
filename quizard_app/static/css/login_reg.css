@@ -60,6 +60,7 @@ margin-bottom:-20px;
 #error-message{
     font-size:15px;
     color:rgb(255, 1, 1);
+    font-weight:bolder;
 }
 
 .messages {

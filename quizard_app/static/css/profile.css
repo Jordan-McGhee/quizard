@@ -18,9 +18,9 @@ body{
 
 #wrapper {
     max-width:1000px;
-    padding:10px;
     width: 80%;
     margin: auto;
+    padding:10px;
 }
 
 ::-webkit-scrollbar{
@@ -35,6 +35,7 @@ body{
 .navbar{
     background-color: transparent;
     border-bottom: 1px solid rgb(255, 255, 255); 
+    margin-bottom:10px;
 }
 
 #quizard{
@@ -55,6 +56,14 @@ body{
     opacity:.5;
 }
 
+#user-pic1{
+    height:150px;
+    width: 150px;
+    border-radius:50%;
+    display:inline;
+    object-fit: cover;
+}
+
 .navbar-item, .navbar-link{
     color:white;
     font-size:20px;
@@ -66,7 +75,7 @@ body{
 }
 
 .button{
-    border: 1px rgb(74, 74, 74);
+    border-style:none;
     background-color:rgb(255, 255, 255);
     font-family: 'Inconsolata', monospace;
     color:rgb(0, 0, 0);
@@ -80,34 +89,9 @@ body{
     filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
 }
 
-#category{
-    margin-left:15%;
-}
-
-select{
-    margin-left:15%;
-    width:300px;
-}
-
-.textarea{
-    margin-bottom:20px;
-}
-
-#header{
-    color:white;
-    font-family: 'cabin';
-    font-size:25px;
-    font-weight:bolder;
-    text-align:center;
-}
-
-.label{
+.user-information{
     margin-top:20px;
-    color:white;
-}
-
-.quiz-information{
-    margin-top:20px;
+    text-align: center;
     background: url(https://i.imgur.com/ChpMnxD.png);
     background-color: rgb(46, 46, 46);
     padding:10px;
@@ -115,33 +99,71 @@ select{
     margin-bottom:20px;
 }
 
-#error-message{
-    font-size:15px;
-    color:rgb(255, 1, 1);
-    font-weight:bolder;
+#update-buttons, #delete-button{
+    background-color: rgb(91, 91, 91);
+    color:white;
 }
 
-.messages {
-    background:transparent;
-    text-align: center;
-    margin: 10px auto;
-    list-style-type: none;
-    padding: 10px;
+#update-buttons:hover{
+    color:black;
+    background-color:rgb(255, 255, 255);
 }
 
-#questions{
-    padding: 10px;
-    max-height: 650px; 
+#delete-button:hover{
+    background-color: rgb(255, 1, 1);
+}
+
+.user-quizzes{
+    height:500px;
     overflow: scroll;
     overflow-x: hidden;
 }
 
-.file{
+table{
+    margin-bottom:20px;
+}
+
+th{
+    background: black;
+}
+
+tr{
+    font-weight:bolder;
+}
+
+h1{
+    color:white;
+    font-size:20px;
+    font-weight:bolder;
+    margin-top:15px;
+}
+
+h2{
+    font-weight:bolder;
+    color:white;
+}
+
+span{
+    text-transform: uppercase;
+    display:block;
+    color:white;
+    font-size:35px;
+    font-family:'cabin';
+}
+
+p, h4, h5{
+    color:white;
+    font-weight:bolder;
+}
+
+#image-upload{
+    margin-left:40px;
+    padding:10px;
+    background-color:transparent;
     color:white;
     font-family: 'Inconsolata', monospace;
 }
 
-#submit-button{
-    margin-left: 85%;
-    margin-top:20px;
+.quiz-title{
+    text-transform: uppercase;
 }

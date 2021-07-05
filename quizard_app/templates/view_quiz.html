@@ -14,7 +14,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'css/this_quiz.css' %}">
+        <link rel="stylesheet" href="{% static 'css/view_quiz.css' %}">
 </head>
 
 <body>
@@ -179,7 +179,7 @@
 
                     <!-- IF QUIZ CREATOR != USER SIGNED IN, DISPLAY CREATOR -->
                     {% if quiz.created_by != user %}
-                    <p id="creator"> quiz by @<a href="/quizard/user/{{quiz.created_by}}">{{quiz.created_by}}</a><br> {{quiz.created_at}}</p>
+                    <p id="creator"> quiz by @<a href="/quizard/user/{{quiz.created_by}}" id="creator-link">{{quiz.created_by}}</a><br> {{quiz.created_at}}</p>
                     {% endif %}
                 </div>
                 <!-- END RIGHT CHILD TILE -->
