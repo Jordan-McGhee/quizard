@@ -142,12 +142,10 @@
                     </div>
 
                     <!-- IMAGE //FIX// --> 
-                    {% if question.image %}
                         <div class="field">
-                            <label for="image{{forloop.counter}}" class="label">Update Image</label>
-                            <input type="file" name="image{{forloop.counter}}" class="file">
+                            <label for="image{{forloop.counter}}" class="label">Add/Update Image</label>
+                            <input type="file" name="image{{forloop.counter}}" class="file" value="{{question.image}}">
                         </div>
-                    {% endif %}
 
                     <!-- ANSWER -->
                     <div class="field">
