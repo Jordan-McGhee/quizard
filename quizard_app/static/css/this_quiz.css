@@ -99,12 +99,9 @@ span:hover{
     filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
 }
 
-p, li{
+p{
     color:white;
     font-weight: bolder;
-}
-
-p{
     margin-top: 10px;
     margin-bottom: 10px;
 }
