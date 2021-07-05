@@ -46,13 +46,6 @@ body{
     opacity:.5;
 }
 
-#user-pic1{
-    height:150px;
-    width: 150px;
-    border-radius:50%;
-    display:inline;
-}
-
 .navbar-item, .navbar-link{
     color:white;
     font-size:20px;
@@ -78,72 +71,55 @@ body{
     filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
 }
 
-.user-information{
-    text-align: center;
-    background: url(https://i.imgur.com/ChpMnxD.png);
-    background-color: rgb(46, 46, 46);
-    padding:10px;
-    border: 2px solid rgb(118, 118, 118);
-    margin-bottom:20px;
-}
-
-#update-buttons, #delete-button{
-    background-color: rgb(91, 91, 91);
-    color:white;
-}
-
-#update-buttons:hover{
-    color:black;
-    background-color:rgb(255, 255, 255);
-}
-
-#delete-button:hover{
-    background-color: rgb(255, 1, 1);
-}
-
-table{
-    margin-top:2px;
-}
-
-th{
-    background: black;
-}
-
-tr{
-    font-weight:bolder;
-}
-
-h1{
-    color:white;
-    font-size:20px;
-    font-weight:bolder;
-    margin-top:15px;
-}
-
 h2{
-    font-weight:bolder;
+    font-size:25px;
+    font-weight:bold;
     color:white;
 }
 
-span{
-    text-transform: uppercase;
-    display:block;
-    color:white;
-    font-size:35px;
-    font-family:'cabin';
-}
-
-p, h4, h5{
+p{
     color:white;
     font-weight:bolder;
+    margin-bottom: 20px;
 }
 
-#image-upload{
-    margin-left:100px;
-    padding:10px;
-    background-color:transparent;
-    color:white;
+#quiz-name{
+    text-transform:uppercase;
 }
-.quiz-title{
-    text-transform: uppercase;
+
+.slideshow-container {
+    background-color: rgb(46, 46, 46);
+    position: relative;
 }
+
+.mySlides {
+    display: none;
+    padding: 50px;
+    text-align: center;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    font-size: 30px;
+    width: auto;
+    margin-top: -30px;
+    padding: 10px;
+    color: rgb(254, 252, 252);
+    font-size: 30px;
+    border-radius: 0 3px 3px 0;
+}
+
+.next {
+    position: absolute;
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+    background-color: rgba(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+

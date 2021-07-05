@@ -17,6 +17,7 @@ body{
 }
 
 #wrapper {
+    max-width:1000px;
     padding:10px;
     width: 80%;
     margin: auto;
@@ -48,10 +49,6 @@ body{
     color:white;
     font-size:20px;
     transition: all 0.3s ease-out;
-}
-
-.navbar-item1{
-    color: black;
 }
 
 .navbar-link{

@@ -53,33 +53,9 @@
                     Create
                 </a>
 
-                <!-- QUIZZES DROPDOWN-->
-                <div class="navbar-item has-dropdown is-hoverable">
-
-                    <!-- QUIZZES MAIN LINK -->
-                    <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-link">
-                        Quizzes
-                    </a>
-
-                    <!-- QUIZZES DROPDOWN ITEMS -->
-                    <div class="navbar-dropdown">
-
-                        <!-- YOUR QUIZZES -->
-                        <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item1">
-                            Your Quizzes
-                        </a>
-
-                        <hr class="navbar-divider">
-
-                        <!-- QUIZZES YOU LIKE -->
-                        <a href="#" class="navbar-item1">
-                            Quizzes You Like
-                        </a>
-
-                        <!-- END QUIZZES DROPDOWN MENU -->
-                    </div>
-                    <!-- END QUIZZES ITEM -->
-                </div>
+                <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
+                    Your Quizzes
+                </a>
 
                 <!-- LOGOUT -->
                 <div class="navbar-item">

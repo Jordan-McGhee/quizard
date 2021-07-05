@@ -40,6 +40,13 @@
 
             <!-- RIGHT SIDE OF NAVBAR -->
             <div class="navbar-menu navbar-end">
+                
+                <!-- USER -->
+                <img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture">
+
+                <a href="/quizard/user/{{user.username}}" class="navbar-item">
+                    {{user.username}}
+                </a>
 
                 <!-- NAVBAR LINKS-->
                 <a href="/quizard" class="navbar-item">
@@ -50,33 +57,9 @@
                     Create
                 </a>
 
-                <!-- QUIZZES DROPDOWN-->
-                <div class="navbar-item has-dropdown is-hoverable">
-
-                    <!-- QUIZZES MAIN LINK -->
-                    <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-link">
-                        Quizzes
-                    </a>
-
-                    <!-- QUIZZES DROPDOWN ITEMS -->
-                    <div class="navbar-dropdown">
-
-                        <!-- YOUR QUIZZES -->
-                        <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item1">
-                            Your Quizzes
-                        </a>
-
-                        <hr class="navbar-divider">
-
-                        <!-- QUIZZES YOU LIKE -->
-                        <a href="#" class="navbar-item1">
-                            Quizzes You Like
-                        </a>
-
-                        <!-- END QUIZZES DROPDOWN MENU -->
-                    </div>
-                    <!-- END QUIZZES ITEM -->
-                </div>
+                <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
+                    Your Quizzes
+                </a>
 
                 <!-- LOGOUT -->
                 <div class="navbar-item">

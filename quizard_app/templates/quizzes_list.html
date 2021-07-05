@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    {% load static %}
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quizard &#129668;</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Castoro&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/user_quizzes.css' %}">
+        
 </head>
+<script src="js/quizzes_slideshow.js"></script>
 <body>
-    <div id="wrapper" style="max-width: 1000px; margin: 20px auto;">
+    <div id="wrapper">
 
     <!-- SPACE FOR NAVBAR -->
-    <nav class="navbar" style="border-bottom: 1px solid black; margin-bottom: 10px;">
+    <nav class="navbar">
 
         <!-- LEFT SIDE OF NAVBAR -->
         <div class="navbar-brand">
                 <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
-                <p class="title is-2 is-align-self-center" id="wtf"><a href="/quizard">Quizard</a></p>
+                <p class="title is-2 is-align-self-center" id="quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></p>
 
                 <!-- BURGER MENU -->
-                <a role="button" class="navbar-burger is-align-self-center" id="wtf" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <a role="button" class="navbar-burger is-align-self-center" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -33,6 +42,8 @@
         <div class="navbar-menu navbar-end">
 
             <!-- USER -->
+            <img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture">
+
             <a href="/quizard/user/{{user.username}}" class="navbar-item">
                 {{user.username}}
             </a>
@@ -46,58 +57,73 @@
                 Create
             </a>
 
-            <!-- QUIZZES DROPDOWN-->
-            <div class="navbar-item has-dropdown is-hoverable">
-
-                <!-- QUIZZES MAIN LINK -->
-                <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-link">
-                    Quizzes
-                </a>
-
-                <!-- QUIZZES DROPDOWN ITEMS -->
-                <div class="navbar-dropdown">
-
-                    <!-- YOUR QUIZZES -->
-                    <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
-                        Your Quizzes
-                    </a>
-                    
-                    <hr class="navbar-divider">
-
-                    <!-- QUIZZES YOU LIKE -->
-                    <a href="#" class="navbar-item">
-                        Quizzes You Like
-                    </a>
-
-                    <!-- END QUIZZES DROPDOWN MENU -->
-                </div>
-                <!-- END QUIZZES ITEM -->
-            </div>
+            <a href="/quizard/user/{{user.username}/quizzes" class="navbar-item">
+            Your Quizzes
+            </a>
 
             <!-- LOGOUT -->
             <div class="navbar-item">
                 <form action="/logout" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="LOGOUT" class="button" id="logout">
+                    <input type="submit" value="LOGOUT" class="button">
                 </form>
             </div>
 
-        
         <!-- END RIGHT SIDE OF NAV -->
         </div>
 
     </nav>
     <!-- END SPACE FOR NAVBAR -->
 
-    <ul>
-        {% for quiz in user_quizzes %}
-            <li>
-                <a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a>
-                {{quiz.created_by}}
-            </li>
-        {% endfor %}
-    </ul>
 
-    <!-- END WRAPPER DIV -->
+    <div class="slideshow-container">
+
+        <!-- Full-width slides/quotes -->
+        {% for quiz in user_quizzes %}
+        <div class="mySlides">
+            <h2> Quiz Title </h2>
+            <p><a href="/quizard/quizzes/{{quiz.id}}" id="quiz-name">{{quiz.name}}</a></p>
+            <h2>Description</h2>
+            <p>{{quiz.description}}</p>
+            <h2>Last Updated</h2>
+            <p>{{quiz.updated_at}}</p>
+        </div>
+        {% endfor %}
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    
+        <script>
+            var slideIndex = 1;
+                showSlides(slideIndex);
+            
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+            
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+            
+            function showSlides(n) {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                if (n > slides.length) {slideIndex = 1}    
+                if (n < 1) {slideIndex = slides.length}
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";  
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex-1].style.display = "block";  
+                dots[slideIndex-1].className += " active";
+                }
+        </script>
     </div>
+    
+    <!-- END WRAPPER DIV -->
+    </div>  
+
 </body>

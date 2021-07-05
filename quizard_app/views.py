@@ -75,6 +75,7 @@ def user_page(request,username):
     this_user = User.objects.get(username = username)
 
     context = {
+        "user": User.objects.get(id=request.session['user_id']),
         'this_user': this_user,
         'created_quizzes' : Quiz.objects.filter(created_by = this_user),
         'liked_quizzes': Quiz.objects.filter(liked_by = this_user),
