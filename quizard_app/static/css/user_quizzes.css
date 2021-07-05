@@ -89,7 +89,9 @@ p{
 }
 
 .slideshow-container {
-    background-color: rgb(46, 46, 46);
+    border: 2px solid rgb(118, 118, 118);
+    margin-top:20px;
+    background-color: rgb(28, 28, 28);
     position: relative;
 }
 

@@ -17,10 +17,10 @@
         <!-- LEFT SIDE OF NAVBAR -->
         <div class="navbar-brand">
                 <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
-                <p class="title is-2 is-align-self-center" id="wtf"><a href="/quizard">Quizard</a></p>
+                <p class="title is-2 is-align-self-center"><a href="/quizard">Quizard</a></p>
 
                 <!-- BURGER MENU -->
-                <a role="button" class="navbar-burger is-align-self-center" id="wtf" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <a role="button" class="navbar-burger is-align-self-center" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -46,43 +46,18 @@
                 Create
             </a>
 
-            <!-- QUIZZES DROPDOWN-->
-            <div class="navbar-item has-dropdown is-hoverable">
-
-                <!-- QUIZZES MAIN LINK -->
-                <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-link">
-                    Quizzes
-                </a>
-
-                <!-- QUIZZES DROPDOWN ITEMS -->
-                <div class="navbar-dropdown">
-
-                    <!-- YOUR QUIZZES -->
-                    <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
-                        Your Quizzes
-                    </a>
-                    
-                    <hr class="navbar-divider">
-
-                    <!-- QUIZZES YOU LIKE -->
-                    <a href="#" class="navbar-item">
-                        Quizzes You Like
-                    </a>
-
-                    <!-- END QUIZZES DROPDOWN MENU -->
-                </div>
-                <!-- END QUIZZES ITEM -->
-            </div>
+            <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
+                Your Quizzes
+            </a>
 
             <!-- LOGOUT -->
             <div class="navbar-item">
                 <form action="/logout" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="LOGOUT" class="button" id="logout">
+                    <input type="submit" value="LOGOUT" class="button">
                 </form>
             </div>
 
-        
         <!-- END RIGHT SIDE OF NAV -->
         </div>
 
@@ -165,10 +140,6 @@
 
         <input type="submit" value="Update Quiz" class="button">
     </form>
-
-
-
-
 
 
     <!-- END WRAPPER DIV -->

@@ -6,6 +6,7 @@
 
 body{
     background:url(https://i.imgur.com/CwBxkGK.png);
+    position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
@@ -46,14 +47,6 @@ body{
     opacity:.5;
 }
 
-#user-pic1{
-    height:150px;
-    width: 150px;
-    border-radius:50%;
-    display:inline;
-    object-fit: cover;
-}
-
 .navbar-item, .navbar-link{
     color:white;
     font-size:20px;
@@ -79,7 +72,19 @@ body{
     filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
 }
 
-.user-information{
+h2{
+    font-size:25px;
+    font-weight:bold;
+    color:white;
+}
+
+p{
+    color:white;
+    font-weight:bolder;
+    margin-bottom: 20px;
+}
+
+.quiz-information{
     text-align: center;
     background: url(https://i.imgur.com/ChpMnxD.png);
     background-color: rgb(46, 46, 46);
@@ -88,63 +93,71 @@ body{
     margin-bottom:20px;
 }
 
-#update-buttons, #delete-button{
-    background-color: rgb(91, 91, 91);
-    color:white;
+#quiz-name, #question-number{
+    text-transform:uppercase;
 }
 
-#update-buttons:hover{
+#question-number{
+    margin-bottom: 10px;
+    font-weight:bolder;
+    font-size: 35px;
+    font-family: 'cabin';
+    color:rgb(118, 117, 117);
+}
+
+#question-image{
+    object-fit: cover;
+    width:400px;
+    height:300px;
+    margin-bottom:10px;
+}
+
+#answer-input{
+    background: rgb(255, 255, 255);
     color:black;
-    background-color:rgb(255, 255, 255);
+    padding:5px;
+    width:800px;
+    height:70px;
 }
 
-#delete-button:hover{
-    background-color: rgb(255, 1, 1);
+#submit{
+    margin-top:20px;
+    margin-left: 90%;
 }
 
-table{
-    margin-bottom:20px;
+.slideshow-container {
+    border: 2px solid rgb(118, 118, 118);
+    margin-top:20px;
+    background-color: rgb(28, 28, 28);
+    position: relative;
 }
 
-th{
-    background: black;
+.mySlides {
+    height:600px;
+    display: none;
+    padding: 50px;
+    text-align: center;
 }
 
-tr{
-    font-weight:bolder;
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    font-size: 30px;
+    width: auto;
+    margin-top: -30px;
+    padding: 10px;
+    color: rgb(254, 252, 252);
+    font-size: 30px;
+    border-radius: 0 3px 3px 0;
 }
 
-h1{
-    color:white;
-    font-size:20px;
-    font-weight:bolder;
-    margin-top:15px;
+.next {
+    position: absolute;
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
 
-h2{
-    font-weight:bolder;
-    color:white;
-}
-
-span{
-    text-transform: uppercase;
-    display:block;
-    color:white;
-    font-size:35px;
-    font-family:'cabin';
-}
-
-p, h4, h5{
-    color:white;
-    font-weight:bolder;
-}
-
-#image-upload{
-    margin-left:100px;
-    padding:10px;
-    background-color:transparent;
-    color:white;
-}
-.quiz-title{
-    text-transform: uppercase;
+.prev:hover, .next:hover {
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+    background-color: rgba(255, 255, 255);
 }
