@@ -75,10 +75,9 @@
     </nav>
     <!-- END SPACE FOR NAVBAR -->
 
+    {% if user_quizzes  %}
 
     <div class="slideshow-container">
-
-        <!-- Full-width slides/quotes -->
         {% for quiz in user_quizzes %}
         <div class="mySlides">
             <h2> Quiz Title </h2>
@@ -92,6 +91,7 @@
 
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
     
         <script>
             var slideIndex = 1;
@@ -121,8 +121,11 @@
                 dots[slideIndex-1].className += " active";
                 }
         </script>
-    </div>
-    
+
+        {% else %}
+            <p>You have not created any quizzes</p>
+        {% endif %}
+
     <!-- END WRAPPER DIV -->
     </div>  
 
