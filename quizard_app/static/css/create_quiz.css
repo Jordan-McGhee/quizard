@@ -114,9 +114,22 @@ select{
     margin-bottom:20px;
 }
 
+#error-message{
+    font-size:15px;
+    color:rgb(255, 1, 1);
+}
+
+.messages {
+    background:transparent;
+    text-align: center;
+    margin: 10px auto;
+    list-style-type: none;
+    padding: 10px;
+}
+
 #questions{
     padding: 10px;
-    max-height: 800px; 
+    max-height: 650px; 
     overflow: scroll;
     overflow-x: hidden;
 }

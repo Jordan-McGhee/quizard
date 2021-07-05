@@ -72,6 +72,22 @@
         </nav>
         <!-- END NAVBAR -->
     
+        <!-- ERROR MESSAGES -->
+        {% if messages %}
+        <div class="card messages">
+            <header class="card-header" id="error-message">
+                    ERROR(S)
+            </header>
+
+            {% for message in messages %}
+                <header class="card-header" id="error-message">
+                        {{message}}
+                </header>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- END ERROR MESSAGES -->
+
         <!-- CREATE QUIZ  -->
         <form action="/quizard/quizzes/create" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
