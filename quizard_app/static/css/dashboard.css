@@ -80,6 +80,12 @@ body{
     filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
 }
 
+#all-quizzes{
+    height:1100px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
 h1{
     font-weight:bolder;
     margin-top:20px;
