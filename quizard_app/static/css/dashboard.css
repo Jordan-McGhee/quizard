@@ -81,7 +81,7 @@ body{
 }
 
 #all-quizzes{
-    height:1100px;
+    height:650px;
     overflow: scroll;
     overflow-x: hidden;
 }
