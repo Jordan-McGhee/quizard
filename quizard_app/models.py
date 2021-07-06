@@ -73,7 +73,7 @@ class QuizManager(models.Manager):
         errors = {}
 
         if len(postData['quiz_name']) < 1:
-            errors['quiz_name'] = "Quiz must have a name!"
+            errors['quiz_name'] = "Quiz must have a title!"
 
         if len(postData['description']) != 0 and len(postData['description']) < 5:
             errors['description'] = "Description has to be longer than 5 characters!"

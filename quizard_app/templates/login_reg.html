@@ -1,59 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Register</title>
+    <title>Quizard &#129668;</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Castoro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/login_reg.css' %}">
-    
 </head>
+
 <body>
+
     <div id="wrapper">
 
+        <!-- NAVBAR -->
         <nav class="navbar">
-
-            <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
-                    <!-- REPLACE THIS WITH LOGO AFTER MAKING -->
-                    <p class="title is-2 is-align-self-center" id="wtf"><a href="#">Quizard</a></p>
-
+                    <div class="title">
+                    <span class="title is-2 is-align-self-center"> <img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></span>
+                    <span class="gradient"></span>
+                    <span class="dodge"></span>
+                    <img src="{% static 'pictures/QuizardLogo.png' %}" id="logo"/><br>
+                    <p id="description">A wickedly fun & enchanting education platform that makes it easy to discover, create, and share intuitively crafted quizzes that cover a plethora of subjects.<br>
+                    Receive invaluable guidance on a wide range of topics, command a deeper understanding of core concepts, and valiantly tackle exams by becoming a revision master with Quizard. &#129668;  </p>
+                    </div>
+    
                     <!-- BURGER MENU -->
-                    <a role="button" class="navbar-burger is-align-self-center" id="wtf" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <a role="button" class="navbar-burger is-align-self-center" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" id="navbar">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                     </a>
-
-            <!-- LEFT SIDE OF NAVBAR END -->
-
             </div>
-
         </nav>
+        <!-- NAVBAR END -->
 
-        <div id="errors">
+        <!-- ERROR MESSAGES -->
             {% if messages %}
                 <div class="card messages">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            ERRORS:
-                        </p>
+                    <header class="card-header" id="error-message">
+                            ERROR(S)
                     </header>
 
                     {% for message in messages %}
-                        <header class="card-header">
-                            <p class="card-header-title">
+                        <header class="card-header" id="error-message">
                                 {{message}}
-                            </p>
                         </header>
                     {% endfor %}
-
                 </div>
             {% endif %}
-
-        </div>
+        <!-- END ERROR MESSAGES -->
 
         <!-- ANCESTOR TILE -->
         <div class="tile is-ancestor is-justify-content-space-between">
@@ -70,9 +74,8 @@
                         </header>
                         <!-- END CARD TITLE DIV -->
                         </div>
-                <!-- END CHILD FOR REGISTER -->
                 </div>
-
+                <!-- END CHILD FOR REGISTER -->
 
                 <!-- CHILD TILE FOR REGISTER -->
                 <div class="tile is-child">
@@ -114,16 +117,11 @@
 
                         </form>
                     </div>
-
-
-
-
-                <!-- END CHILD TILE FOR REGISTER -->
                 </div>
+                <!-- END CHILD TILE FOR REGISTER -->
 
-
-            <!-- END PARENT TILE FOR REGISTER -->
             </div>
+            <!-- END PARENT TILE FOR REGISTER -->
 
             <!-- PARENT TILE FOR LOGIN -->
             <div class="tile is-parent is-6 is-vertical">
@@ -135,11 +133,10 @@
                         <header class="card-header">
                             <p class="card-header-title">LOGIN</p>
                         </header>
-                        <!-- END CARD TITLE DIV -->
                         </div>
-                <!-- END CHILD FOR LOGIN -->
+                        <!-- END CARD TITLE DIV -->
                 </div>
-
+                <!-- END CHILD FOR LOGIN -->
 
                 <!-- CHILD TILE FOR LOGIN -->
                 <div class="tile is-child">
@@ -161,17 +158,11 @@
 
                         </form>
                     </div>
-                <!-- END CHILD TILE FOR LOGIN -->
                 </div>
-
-
-            <!-- END PARENT TILE FOR REGISTER -->
-            </div>
-
-        <!-- END ANCESTOR TILE -->
+                <!-- END CHILD TILE FOR LOGIN -->
         </div>
+        <!-- END ANCESTOR TILE -->
 
-    <!-- END WRAPPER DIV -->
     </div>
 </body>
 </html>
