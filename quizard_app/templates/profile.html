@@ -26,7 +26,7 @@
 
             <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
-                <p class="title is-2 is-align-self-center" id="quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></p>
+                <p class="title is-2 is-align-self-center" id="quizard"><a href="/quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></a></p>
 
                 <!-- BURGER MENU -->
                 <a role="button" class="navbar-burger is-align-self-center" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -41,7 +41,7 @@
             <div class="navbar-menu navbar-end">
                 
                 <!-- USER -->
-                <img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture">
+                <a href="/quizard/user/{{user.username}}"><img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture"></a>
 
                 <a href="/quizard/user/{{user.username}}" class="navbar-item">
                     {{user.username}}
@@ -91,8 +91,6 @@
 
                 <div class="mb-3">
                     <input type="submit" value="Update" class="button" id="update-buttons"> 
-
-<<<<<<< HEAD
                     <a href="/quizard/user/{{this_user.username}}/destroy" class="button" id="delete-button" onclick="return confirm('Are you sure you want to delete your account?');">Delete Account</a>
                 </div>
             </form>
@@ -103,29 +101,7 @@
         <!-- QUIZZES CONTENT -->
         <div class ="user-quizzes">
 
-            <h1>Quizzes {{this_user.first_name}}'s Taken: </h1>
-
-            <table class="table  is-fullwidth is-hoverable">
-                <thead>
-                    <th><h2>Quiz Title</h2></th>
-                    <th><h2>Category</h2></th>
-                    <th><h2>Attempts</h2></th>
-                    <th><h2>Take Quiz</h2></th>
-                </thead>
-                <tbody>
-                    {% for quiz in quizzes_taken reversed %}
-                    <tr>
-                        <td class="quiz-title"><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
-                        <td>{{quiz.get_category_display}}</td>
-                        <td>{{quiz.taken_by.count}}</td>
-                        <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Start Quiz</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-
-            <h1>Quizzes Created By {{this_user.first_name}}:</h1>
+            <h1>{{this_user.first_name}}'s Quizzes:</h1>
 
             <table class="table  is-fullwidth is-hoverable">
                 <thead>
@@ -167,89 +143,30 @@
                     {% endfor %}
                 </tbody>
             </table>
+
+            <h1>Quizzes {{this_user.first_name}} has Taken: </h1>
+
+            <table class="table  is-fullwidth is-hoverable">
+                <thead>
+                    <th><h2>Quiz Title</h2></th>
+                    <th><h2>Category</h2></th>
+                    <th><h2>Attempts</h2></th>
+                    <th><h2>Take Quiz</h2></th>
+                </thead>
+                <tbody>
+                    {% for quiz in quizzes_taken reversed %}
+                    <tr>
+                        <td class="quiz-title"><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
+                        <td>{{quiz.get_category_display}}</td>
+                        <td>{{quiz.taken_by.count}}</td>
+                        <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Start Quiz</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
         </div>
         <!-- QUIZZES CONTENT END -->
-=======
-        <h4>Quizzes taken</h4>
-        <p>{{this_user.quizzes_taken.count}}</p>
-        <p>
-            <!--if current user is the creator of this page, then he can update a user profile_photo here-->
-            {% if this_user.id == request.session.user_id %}
-        <h5>Upload a user photo here</h5>
-        <form action="/quizard/user/{{this_user.username}}/update" method='POST' enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="mb-3">
-                <input type="file" name="user_img">
-            </div>
-            <div class="mb-3">
-                <input type="submit" value="update" type="button" class="button is-info">
-                <a href="/quizard/user/{{this_user.username}}" type="button" class="button is-info">Cancel</a> <a class="button is-info"
-                    href="/quizard/user/{{this_user.username}}/destroy">Delete Account</a>
-            </div>
-        </form>
-        {% endif %}
-        <hr>
-        <h4 class="subtitle is-4">Quizzes {{this_user.first_name}}{{thiis_user.last_name}} has attended </h4>
-        <table class="table  is-fullwidth is-hoverable">
-            <thead>
-                <th>Quiz Name</th>
-                <th>Category</th>
-                <th>Times taken</th>
-                <th>Go take this Quiz</th>
-            </thead>
-            <tbody>
-                {% for quiz in quizzes_taken reversed %}
-                <tr>
-                    <td><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
-                    <td>{{quiz.get_category_display}}</td>
-                    <td>{{quiz.taken_by.count}}</td>
-                    <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Take this quiz</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <h4 class="subtitle is-4">Quizzes created by {{this_user.first_name}}{{thiis_user.last_name}}</h4>
-        <table class="table  is-fullwidth is-hoverable">
-            <thead>
-                <th>Quiz Name</th>
-                <th>Category</th>
-                <th>Created at</th>
-                <th>Times taken</th>
-                <th>Go take this Quiz</th>
-            </thead>
-            <tbody>
-                {% for quiz in created_quizzes.all reversed %}
-                <tr>
-                    <td><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
-                    <td>{{quiz.get_category_display}}</td>
-                    <td>{{quiz.created_at|date:'Y-m-d'}}</td>
-                    <td>{{quiz.taken_by.count}}</td>
-                    <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Take this quiz</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-
-     
-        <h4 class="subtitle is-4">Quizzes favored by {{this_user.first_name}} are</h4>
-        <table class="table  is-fullwidth is-hoverable">
-            <thead>
-                <th>Quiz Name</th>
-                <th>Category</th>
-                <th>Times taken</th>
-            </thead>
-            <tbody>
-                {% for quiz in liked_quizzes.all reversed %}
-                <tr>
-                    <td>{{quiz.name}} </td>
-                    <td>{{quiz.get_category_display}}</td>
-                    <td>{{quiz.taken_by.count}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
->>>>>>> main
 
     </div>
 </body>

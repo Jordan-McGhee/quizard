@@ -161,12 +161,20 @@ def view_quiz(request,quiz_id):
     # GRABS WORD FROM TUPLE PAIR TO GIVE US THE CATEGORY NAME FOR THIS QUIZ
     quiz_category_word = Quiz.category_choices[quiz_category_num][1]
 
+
+    # MEASURES LIKES VS TOTAL LIKES/DISLIKES OF A QUIZ AS A PERCENTAGE
+    popularity = 0
+
+    if len(quiz.liked_by.all()) > 0:
+        popularity = len(quiz.liked_by.all())//(len(quiz.disliked_by.all()) + len(quiz.liked_by.all())) * 100
+
+
     context = {
         "user": user,
         "quiz": quiz,
         "quiz_category": quiz_category_word,
         "category_choices": Quiz.category_choices,
-        # "popularity": len(quiz.liked_by.all)/len(quiz.disliked_by.all)
+        "popularity": popularity
     }
 
     return render(request, "view_quiz.html", context)
@@ -285,6 +293,7 @@ def mark_quiz(request,quiz_id):
 
         quiz = Quiz.objects.get(id = quiz_id)
         print(f"quiz: {quiz.name}")
+        user = User.objects.get(id=request.session['user_id'])
         count = 0
         
         for i,question in enumerate(quiz.questions.all()):
@@ -297,7 +306,7 @@ def mark_quiz(request,quiz_id):
         context = {
         'quiz':quiz,
         'score': count,
-
+        'user': user
         }
 
         return render(request, 'take_quiz.html',context)

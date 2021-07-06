@@ -26,7 +26,7 @@
 
             <!-- LEFT SIDE OF NAVBAR -->
             <div class="navbar-brand">
-                    <p class="title is-2 is-align-self-center" id="quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></p>
+                <p class="title is-2 is-align-self-center" id="quizard"><a href="/quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></a></p>
 
                     <!-- BURGER MENU -->
                     <a role="button" class="navbar-burger is-align-self-center" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -41,7 +41,7 @@
             <div class="navbar-menu navbar-end">
 
                 <!-- USER -->
-                <img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture">
+                <a href="/quizard/user/{{user.username}}"><img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture"></a>
 
                 <a href="/quizard/user/{{user.username}}" class="navbar-item">
                     {{user.username}}
@@ -80,19 +80,6 @@
 
                 <!-- LEFT CHILD TILE -->
                 <div class="tile is-child">
-<<<<<<< HEAD
-=======
-                    
-                    <p class="title is-2">{{quiz.name}}</p>
-                    <p class="subtitle is-5">Category: {{quiz_category}}</p>
-
-                    <p>Description: {{quiz.description}}</p>
-                    <p>Created By: <a href="/quizard/user/{{quiz.created_by.username}}">{{quiz.created_by}}</a> </p>
-                    <p>{{quiz.questions.all|length}} Questions</p>
-
-                    <!-- !!!!!NEED TO FIX THIS!!!!! -->
-                    <p>Popularity: {{popularity}}</p>
->>>>>>> main
 
                     <!-- QUIZ INFORMATION LEFT -->
                     <div class = "quiz-information">
@@ -116,18 +103,10 @@
                         <p>{{quiz.questions.all|length}}</p>
 
                         <!-- !!!!!! POPULARITY NEEDS TO BE FIXED !!!!!! -->
-                        <span>Popularity: </span> 
-                        <p> {{popularity}}</p>
+                        <span>Popularity: </span>
+                        <p> {{popularity}}%</p>
 
-                        <span>Liked By:</span><br>
-                        {% for user in quiz.liked_by.all %}
-                            <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a><p>
-                        {% endfor %}
-
-                        <span>Disliked By:</span> <br>
-                        {% for user in quiz.disliked_by.all %}
-                            <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a></p>
-                        {% endfor %}
+                        <a href="/quizard/quizzes/{{quiz.id}}/take_quiz" class="button">Play Quiz</a>
                     </div>
                     <!-- END LEFT QUIZ INFORMATION -->
                 </div>
@@ -141,24 +120,20 @@
                 <!-- RIGHT CHILD TILE -->
                 <div class="tile is-child">
                     <!-- RIGHT QUIZ INFORMATION -->
-                    <p class="description">Description:</p>
-                    <p id="description">{{quiz.description}}</p>
+                    {% if quiz.description %}
+                        <p class="description">Description:</p>
+                        <p id="description">{{quiz.description}}</p>
+                    {% endif %}
+
                     <table class="table is-bordered is-fullwidth is-striped">
                         <thead>
                             <tr>
-<<<<<<< HEAD
                                 <th><h2>No.</h2></th>
                                 <th><h2>Question(s)</h2></th>
                                 <th><h2>Answer(s)</h2></th>
                                 {% if quiz.created_by == user %}
                                 <th><h2>Actions</h2></th>
-=======
-                                <th>No.</th>
-                                <th>Question</th>
-                                {% if quiz.created_by == user %}
-                                <th>Answer</th>
-                                <th>Actions</th>
->>>>>>> main
+
                                 {% endif %}
                             </tr>
                         </thead>
