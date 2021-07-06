@@ -1,4 +1,4 @@
-* {
+*{
     margin: 0px;
     padding: 0px;
     font-family: 'Inconsolata', monospace;
@@ -6,30 +6,14 @@
 
 body{
     background:url(https://i.imgur.com/CwBxkGK.png);
-    position:absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height:100%;
-    display:block;
-}
+    background-repeat: round;
+    }
 
-#wrapper {
+#wrapper{
     max-width:1000px;
     padding:10px;
     width: 80%;
     margin: auto;
-}
-
-::-webkit-scrollbar{
-    width:12px;
-}
-
-::-webkit-scrollbar-thumb{
-    background:linear-gradient(transparent,white);
-    border-radius: 6px; 
 }
 
 .navbar{
@@ -131,7 +115,7 @@ select{
 
 #questions{
     padding: 10px;
-    max-height: 650px; 
+    max-height: 800px; 
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -144,4 +128,5 @@ select{
 #submit-button{
     margin-left: 85%;
     margin-top:20px;
+    margin-bottom: 100px;
 }
