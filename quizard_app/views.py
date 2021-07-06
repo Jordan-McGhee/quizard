@@ -77,17 +77,13 @@ def user_page(request,username):
     this_user = User.objects.get(username = username)
 
     context = {
-<<<<<<< HEAD
-        "user": User.objects.get(id=request.session['user_id']),
-=======
         'user': user,
->>>>>>> main
         'this_user': this_user,
         'created_quizzes' : Quiz.objects.filter(created_by = this_user),
         'liked_quizzes': Quiz.objects.filter(liked_by = this_user),
         'quizzes_taken': Quiz.objects.filter(taken_by = this_user),
-
     }
+    
     return render(request,'profile.html',context)
 
 # DELETE ONCE PROJECT IS MERGED! PLACEHOLDER TO VIEW ALL QUIZZES UNTIL USER PAGE IS RUNNING
