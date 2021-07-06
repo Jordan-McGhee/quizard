@@ -115,7 +115,7 @@
         </form>
         {% endif %}
         <hr>
-        <h2>Quizzes {{this_user.first_name}}{{thiis_user.last_name}} has attended </h2>
+        <h4 class="subtitle is-4">Quizzes {{this_user.first_name}}{{thiis_user.last_name}} has attended </h4>
         <table class="table  is-fullwidth is-hoverable">
             <thead>
                 <th>Quiz Name</th>
@@ -126,7 +126,7 @@
             <tbody>
                 {% for quiz in quizzes_taken reversed %}
                 <tr>
-                    <td>{{quiz.name}} </td>
+                    <td><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
                     <td>{{quiz.get_category_display}}</td>
                     <td>{{quiz.taken_by.count}}</td>
                     <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Take this quiz</a></td>
@@ -134,21 +134,21 @@
                 {% endfor %}
             </tbody>
         </table>
-        <h2>Quizzes created by {{this_user.first_name}}{{thiis_user.last_name}}</h2>
-
-
+        <h4 class="subtitle is-4">Quizzes created by {{this_user.first_name}}{{thiis_user.last_name}}</h4>
         <table class="table  is-fullwidth is-hoverable">
             <thead>
                 <th>Quiz Name</th>
                 <th>Category</th>
+                <th>Created at</th>
                 <th>Times taken</th>
                 <th>Go take this Quiz</th>
             </thead>
             <tbody>
                 {% for quiz in created_quizzes.all reversed %}
                 <tr>
-                    <td>{{quiz.name}} </td>
+                    <td><a href="/quizard/quizzes/{{quiz.id}}">{{quiz.name}}</a></td>
                     <td>{{quiz.get_category_display}}</td>
+                    <td>{{quiz.created_at|date:'Y-m-d'}}</td>
                     <td>{{quiz.taken_by.count}}</td>
                     <td><a href="/quizard/quizzes/{{quiz.id}}/take_quiz">Take this quiz</a></td>
                 </tr>
@@ -158,7 +158,7 @@
 
 
      
-        <h2>{{this_user.first_name}}'s favorite quizzes are</h2>
+        <h4 class="subtitle is-4">Quizzes favored by {{this_user.first_name}} are</h4>
         <table class="table  is-fullwidth is-hoverable">
             <thead>
                 <th>Quiz Name</th>
