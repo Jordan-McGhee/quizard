@@ -70,12 +70,18 @@ def sort_category(request):
 
 # PROFILE PAGE
 def user_page(request,username):
+    
     if 'user_id' not in request.session:
         return redirect("/")
+    user = User.objects.get(id=request.session['user_id'])
     this_user = User.objects.get(username = username)
 
     context = {
+<<<<<<< HEAD
         "user": User.objects.get(id=request.session['user_id']),
+=======
+        'user': user,
+>>>>>>> main
         'this_user': this_user,
         'created_quizzes' : Quiz.objects.filter(created_by = this_user),
         'liked_quizzes': Quiz.objects.filter(liked_by = this_user),

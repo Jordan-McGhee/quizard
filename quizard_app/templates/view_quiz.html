@@ -80,6 +80,19 @@
 
                 <!-- LEFT CHILD TILE -->
                 <div class="tile is-child">
+<<<<<<< HEAD
+=======
+                    
+                    <p class="title is-2">{{quiz.name}}</p>
+                    <p class="subtitle is-5">Category: {{quiz_category}}</p>
+
+                    <p>Description: {{quiz.description}}</p>
+                    <p>Created By: <a href="/quizard/user/{{quiz.created_by.username}}">{{quiz.created_by}}</a> </p>
+                    <p>{{quiz.questions.all|length}} Questions</p>
+
+                    <!-- !!!!!NEED TO FIX THIS!!!!! -->
+                    <p>Popularity: {{popularity}}</p>
+>>>>>>> main
 
                     <!-- QUIZ INFORMATION LEFT -->
                     <div class = "quiz-information">
@@ -133,11 +146,19 @@
                     <table class="table is-bordered is-fullwidth is-striped">
                         <thead>
                             <tr>
+<<<<<<< HEAD
                                 <th><h2>No.</h2></th>
                                 <th><h2>Question(s)</h2></th>
                                 <th><h2>Answer(s)</h2></th>
                                 {% if quiz.created_by == user %}
                                 <th><h2>Actions</h2></th>
+=======
+                                <th>No.</th>
+                                <th>Question</th>
+                                {% if quiz.created_by == user %}
+                                <th>Answer</th>
+                                <th>Actions</th>
+>>>>>>> main
                                 {% endif %}
                             </tr>
                         </thead>
@@ -146,6 +167,7 @@
                                 <tr>
                                     <td>{{forloop.counter}}</td>
                                     <td>{{question.entry}}</td>
+                                    {% if quiz.created_by == user %}
                                     <td>{{question.answer}}</td>
                                     <!-- IF QUIZ CREATOR == USER SIGNED IN, DISPLAY EDIT & DELETE FLASHCARD BUTTONS -->
                                     {% if quiz.created_by == user %}
@@ -157,6 +179,7 @@
                                                 <input type="submit" value="Delete" class="button is-danger is-small" id="delete-flashcard" onclick="return confirm('Are you sure you want to delete this flashcard?');">
                                             </form>
                                         </div>
+                                        {% endif %}
                                     </td>
                                     {% endif %}
                                 </tr>
