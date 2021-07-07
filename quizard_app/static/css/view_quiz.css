@@ -128,12 +128,27 @@ p{
     text-transform: uppercase;
 }
 
+.likes-dislikes{
+    height:100px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
 #like-dislike-buttons{
     background-color: rgb(91, 91, 91);
     color:white;
 }
 
 #like-dislike-buttons:hover{
+    color:black;
+    background-color:rgb(255, 255, 255);
+}
+
+#start-quiz-button{
+    margin-top:20px;
+}
+
+#start-quiz-button:hover{
     color:black;
     background-color:rgb(255, 255, 255);
 }

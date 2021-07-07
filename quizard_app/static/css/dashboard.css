@@ -68,7 +68,6 @@ html{
 }
 
 #all-quizzes{
-    background-color:white;
     height:800px;
     overflow: scroll;
     overflow-x: hidden;
