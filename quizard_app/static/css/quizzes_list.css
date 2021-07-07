@@ -69,15 +69,20 @@ html{
 }
 
 h2{
-    font-size:25px;
+    font-size:30px;
     font-weight:bold;
     color:white;
 }
 
 p{
     color:white;
+    font-size:25px;
     font-weight:bolder;
     margin-bottom: 20px;
+}
+
+p a:hover{
+    color:white;
 }
 
 #quiz-name{
@@ -120,5 +125,7 @@ p{
     background-color: rgba(255, 255, 255);
     color: rgb(0, 0, 0);
 }
+
+
 
 
