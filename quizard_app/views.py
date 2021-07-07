@@ -136,7 +136,7 @@ def create_quiz(request):
         quiz = Quiz.objects.create(name=request.POST['quiz_name'], description=request.POST['description'], created_by=user, category = request.POST['category'])
 
         for i in range(1,26):
-            if request.POST[f'entry{i}'] != "":
+            if request.POST[f'entry{i}'] != "" or request.POST[f'image{i}']:
                 Question.objects.create(
                     quiz = quiz,
                     entry=request.POST[f'entry{i}'],
@@ -312,15 +312,6 @@ def mark_quiz(request,quiz_id):
         return render(request, 'take_quiz.html',context)
     return redirect(f'/quizard/quizzes/{quiz_id}/take_quiz')
 
-    #     print(i.answer)
-    #     if i.answer == request.POST['question']:
-    #         count = count + 1
-    #     return count
-    # context = {
-    #     'quiz':quiz,
-    #     'score': count,
-    # }
-    # return render(request, 'take_quiz.html',context)
 
 # FLASHCARDS
 def create_flashcard(request,quiz_id):
