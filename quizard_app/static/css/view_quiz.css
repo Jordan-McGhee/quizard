@@ -102,6 +102,10 @@ p{
     margin-bottom: 10px;
 }
 
+p a:hover{
+    color:white;
+}
+
 .username{
     color:white;
 }
@@ -137,6 +141,7 @@ p{
 #like-dislike-buttons{
     background-color: rgb(91, 91, 91);
     color:white;
+    margin-right: 8px;
 }
 
 #like-dislike-buttons:hover{
