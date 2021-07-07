@@ -104,18 +104,20 @@
 
                         <span>Popularity: </span>
                         <p> {{popularity}}%</p>
+                        
+                        <div class="likes-dislikes">
+                            <span>Liked By:</span><br>
+                            {% for user in quiz.liked_by.all %}
+                                <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a><p>
+                            {% endfor %}
 
-                        <span>Liked By:</span><br>
-                        {% for user in quiz.liked_by.all %}
-                            <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a><p>
-                        {% endfor %}
+                            <span>Disliked By:</span> <br>
+                            {% for user in quiz.disliked_by.all %}
+                                <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a></p>
+                            {% endfor %}
+                        </div>
 
-                        <span>Disliked By:</span> <br>
-                        {% for user in quiz.disliked_by.all %}
-                            <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a></p>
-                        {% endfor %}
-
-                        <a href="/quizard/quizzes/{{quiz.id}}/take_quiz" class="button">Start Quiz</a>
+                        <a href="/quizard/quizzes/{{quiz.id}}/take_quiz" class="button" id="start-quiz-button">Start Quiz</a>
                     </div>
                     <!-- END LEFT QUIZ INFORMATION -->
                 </div>
