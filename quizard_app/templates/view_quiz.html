@@ -104,6 +104,11 @@
 
                         <span>Popularity: </span>
                         <p> {{popularity}}%</p>
+
+                        {% if score %}
+                            <span>Recent Score: </span>
+                            <p> {{score}}%</p>
+                        {% endif %}
                         
                         <div class="likes-dislikes">
                             <span>Liked By:</span><br>
@@ -158,13 +163,12 @@
                                     <!-- IF QUIZ CREATOR == USER SIGNED IN, DISPLAY EDIT & DELETE FLASHCARD BUTTONS -->
                                     {% if quiz.created_by == user %}
                                     <td>
-                                        <div class="field is-grouped">
-                                            <a href="/quizard/quizzes/{{quiz.id}}/flashcard/{{question.id}}/edit" class="button is-small">Edit</a>
-                                            <form action="/quizard/quizzes/{{quiz.id}}/flashcard/{{question.id}}/destroy" method="POST">
-                                                {% csrf_token %}
-                                                <input type="submit" value="Delete" class="button is-danger is-small" id="delete-flashcard" onclick="return confirm('Are you sure you want to delete this flashcard?');">
-                                            </form>
-                                        </div>
+
+                                        <form action="/quizard/quizzes/{{quiz.id}}/flashcard/{{question.id}}/destroy" method="POST">
+                                            {% csrf_token %}
+                                            <input type="submit" value="Delete" class="button is-danger is-small" id="delete-flashcard" onclick="return confirm('Are you sure you want to delete this flashcard?');">
+                                        </form>
+
                                         {% endif %}
                                     </td>
                                     {% endif %}

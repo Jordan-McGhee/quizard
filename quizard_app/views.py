@@ -307,6 +307,7 @@ def take_quiz(request,quiz_id):
     quiz = Quiz.objects.get(id = quiz_id)
     user = User.objects.get(id=request.session['user_id'])
     quiz.taken_by.add(user)
+    print(quiz.taken_by.all())
 
     context = {
         'quiz': quiz,
@@ -323,21 +324,34 @@ def mark_quiz(request,quiz_id):
         print(f"quiz: {quiz.name}")
         user = User.objects.get(id=request.session['user_id'])
         count = 0
+        length_of_quiz = len(quiz.questions.all())
+
+        # IS A STR NUMBER FROM CATEGORY CHOICES IN MODELS
+        quiz_category = quiz.category
+        # CONVERTS TO NUM AND SUBTRACTS 1 TO GRAB RIGHT INDEX
+        quiz_category_num = int(quiz_category)-1
+        # GRABS WORD FROM TUPLE PAIR TO GIVE US THE CATEGORY NAME FOR THIS QUIZ
+        quiz_category_word = Quiz.category_choices[quiz_category_num][1]
         
         for i,question in enumerate(quiz.questions.all()):
             if question.answer == request.POST[f'question{i+1}']:
                 count += 1
-            print(f"Question: {question.entry}")
-            print(f"Answer: {question.answer}")
-            print(f'Entered answer: {request.POST[f"question{i+1}"]}') 
+
+        # MEASURES LIKES VS TOTAL LIKES/DISLIKES OF A QUIZ AS A PERCENTAGE
+        popularity = 0
+
+        if len(quiz.liked_by.all()) > 0:
+            popularity = len(quiz.liked_by.all())//(len(quiz.disliked_by.all()) + len(quiz.liked_by.all())) * 100
 
         context = {
         'quiz':quiz,
-        'score': count,
-        'user': user
+        "quiz_category": quiz_category_word,
+        'score': str(count/length_of_quiz*100),
+        'user': user,
+        'popularity': popularity
         }
 
-        return render(request, 'take_quiz.html',context)
+        return render(request, 'view_quiz.html',context)
     return redirect(f'/quizard/quizzes/{quiz_id}/take_quiz')
 
 
