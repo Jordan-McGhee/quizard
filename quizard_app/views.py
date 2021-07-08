@@ -224,12 +224,18 @@ def edit_quiz(request,quiz_id):
     # GRABS WORD FROM TUPLE PAIR TO GIVE US THE CATEGORY NAME FOR THIS QUIZ
     quiz_category_word = Quiz.category_choices[quiz_category_num][1]
 
+    num_quiz_questions = len(quiz.questions.all())
+    print(f"Num of Questions: {num_quiz_questions}")
+
+    range_start = 1+num_quiz_questions
+    print(f"Range Start: {range_start}")
+
     context = {
         "user": user,
         "quiz": quiz,
         "quiz_category": quiz_category_word,
         "category_choices": Quiz.category_choices,
-        "range": range(25)
+        "range": range(range_start, 26)
     }
 
     return render(request, "edit_quiz.html", context)
@@ -237,7 +243,7 @@ def edit_quiz(request,quiz_id):
 def update_quiz(request,quiz_id):
     if request.method == "POST":
         errors = Quiz.objects.validator(request.POST)
-        print(errors)
+        # print(errors)
         if len(errors) > 0:
             for k, v in errors.items():
                 messages.error(request, v)
@@ -247,6 +253,13 @@ def update_quiz(request,quiz_id):
         user = User.objects.get(id=request.session['user_id'])
         quiz = Quiz.objects.get(id=quiz_id)
 
+        # TRACK FOR NUM OF QUESTIONS IN QUIZ
+        num_quiz_questions = len(quiz.questions.all())
+        print(f"Num of Questions: {num_quiz_questions}")
+
+        range_start = num_quiz_questions+1
+        print(f"Range Start: {range_start}")
+
         # QUIZ UPDATE
         quiz.name = request.POST['quiz_name']
         quiz.description = request.POST['description']
@@ -254,13 +267,26 @@ def update_quiz(request,quiz_id):
 
         # QUESTIONS UPDATE
         for i,question in enumerate(quiz.questions.all()):
-            
+
+            print(f"Original Question #{i+1}. Question = {question.entry}, Answer = {question.answer}")
             question.entry = request.POST[f'entry{i+1}']
             question.answer = request.POST[f'answer{i+1}']
             question.image = request.FILES.get(f"image{i+1}") or question.image
-
+            print(f" Updated Question #{i+1}. Question = {question.entry}, Answer = {question.answer}")
             question.save()
+            
 
+        for i in range(range_start,26):
+            if request.POST[f'entry{i}'] != "" or request.POST[f'image{i}']:
+                print(f"Adding Questions. Currently on i = {i}")
+                question = Question.objects.create(
+                    quiz = quiz,
+                    entry=request.POST[f'entry{i}'],
+                    image=request.FILES.get(f"image{i}"),
+                    answer=request.POST[f'answer{i}']
+                    )
+                print(f"New Question #{i}: Question = {question.entry}, Answer = {question.answer}")
+        
         quiz.save()
     
     return redirect(f"/quizard/quizzes/{quiz_id}")

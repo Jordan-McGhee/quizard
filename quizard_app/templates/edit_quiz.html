@@ -154,6 +154,29 @@
                     </div>
                 </div>
             {% endfor %}
+
+            {% for i in range %}
+                <div class="field is-grouped is-justify-content-space-between is-align-items-center">
+                    <!-- ENTRY -->
+                    <div class="field control is-expanded">
+                        <label for="entry{{i}}" class="label">Question {{i}}</label>
+                        <input type="text" class="input" placeholder="Question #{{i}}" name="entry{{i}}">
+                    </div>
+
+                    <!-- ENTRY IMAGE -->
+                    <div class="field">
+                        <label for="image{{i}}" class="label">Add Image?</label>
+                        <input type="file" name="image{{i}}" class="file">
+                    </div>
+
+                    <!-- ANSWER -->
+                    <div class="field">
+                        <label for="answer{{i}}" class="label">Answer {{i}}</label>
+                        <input type="text" class="input" placeholder="Answer #{{i}}" name="answer{{i}}">
+                    </div>
+                </div>
+            {% endfor %}
+
         </div>
         <!-- END QUIZ QUESTIONS -->
 
