@@ -39,6 +39,10 @@ body{
     opacity:.5;
 }
 
+#nav-username{
+    text-transform: capitalize;
+}
+
 .navbar-item, .navbar-link{
     color:white;
     font-size:20px;

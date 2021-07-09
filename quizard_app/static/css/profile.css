@@ -43,6 +43,10 @@ background-size: cover;
     opacity:.5;
 }
 
+#nav-username{
+    text-transform: capitalize;
+}
+
 #user-pic1{
     height:150px;
     width: 150px;
@@ -145,11 +149,16 @@ p, h4, h5{
 }
 
 #image-upload{
+    margin-top:5px;
+    margin-bottom:5px;
     margin-left:40px;
-    padding:10px;
     background-color:transparent;
     color:white;
     font-family: 'Inconsolata', monospace;
+}
+
+#image-upload:hover{
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
 }
 
 .quiz-title{

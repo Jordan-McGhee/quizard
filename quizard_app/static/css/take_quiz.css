@@ -43,6 +43,10 @@ html{
     opacity:.5;
 }
 
+#nav-username{
+    text-transform: capitalize;
+}
+
 .navbar-item, .navbar-link{
     color:white;
     font-size:20px;
@@ -91,6 +95,7 @@ p{
 
 #quiz-name, #question-number{
     text-transform:uppercase;
+    font-size:35px;
 }
 
 #question-number{
@@ -108,12 +113,18 @@ p{
     margin-bottom:10px;
 }
 
+#question{
+    font-size:25px;
+    font-weight:bolder;
+}
+
 #answer-input{
     background: rgb(255, 255, 255);
     color:black;
     padding:5px;
     width:800px;
     height:70px;
+    font-size:25px;
 }
 
 #submit{
