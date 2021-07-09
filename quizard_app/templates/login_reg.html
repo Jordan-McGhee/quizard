@@ -25,12 +25,12 @@
         <nav class="navbar">
             <div class="navbar-brand">
                     <div class="title">
-                    <span class="title is-2 is-align-self-center"> <img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></span>
-                    <span class="gradient"></span>
-                    <span class="dodge"></span>
-                    <img src="{% static 'pictures/QuizardLogo.png' %}" id="logo"/><br>
-                    <p id="description">A wickedly fun & enchanting education platform that makes it easy to discover, create, and share intuitively crafted quizzes that cover a plethora of subjects.<br>
-                    Receive invaluable guidance on a wide range of topics, command a deeper understanding of core concepts, and valiantly tackle exams by becoming a revision master with Quizard. &#129668;  </p>
+                        <span class="title is-2 is-align-self-center"> <img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></span>
+                        <img src="{% static 'pictures/QuizardLogo.png' %}" id="logo"/><br>
+                        <p id="description">A wickedly fun & enchanting education platform that makes it easy to discover, create, and share intuitively crafted quizzes that cover a plethora of subjects.<br>
+                        Receive invaluable guidance on a wide range of topics, command a deeper understanding of core concepts, and valiantly tackle exams by becoming a revision master with Quizard. 
+                        <p id="wand" onclick="changeBackground()">&#129668;</p>
+                        </p>
                     </div>
     
                     <!-- BURGER MENU -->
@@ -163,6 +163,15 @@
         </div>
         <!-- END ANCESTOR TILE -->
 
+        <!-- JAVASCRIPT CHANGE BACKGROUND IMAGE-->
+        <script>
+            function changeBackground() {
+                document.body.style.backgroundImage = "url('../media/sparkle.gif')";
+                document.body.style.backgroundRepeat = "no-repeat";
+                document.body.style.backgroundSize = "cover";
+                document.body.style.borderBottom= '10px solid #031548';
+            }
+        </script>
     </div>
 </body>
 </html>

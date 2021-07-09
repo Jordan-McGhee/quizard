@@ -77,6 +77,7 @@ margin-bottom:-20px;
 
 .card-header-title{
     color:rgb(118, 117, 117);
+    font-size:35px;
 }
 
 .card-header-title:hover{
@@ -111,7 +112,5 @@ margin-bottom:-20px;
 }
 
 .button:hover{
-    background-color:rgb(2, 2, 2);
-    color:rgb(255, 255, 255);
     filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
 }

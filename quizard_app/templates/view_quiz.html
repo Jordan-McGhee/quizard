@@ -43,15 +43,11 @@
                 <!-- USER -->
                 <a href="/quizard/user/{{user.username}}"><img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture"></a>
 
-                <a href="/quizard/user/{{user.username}}" class="navbar-item">
+                <a href="/quizard/user/{{user.username}}" class="navbar-item" id="nav-username">
                     {{user.username}}
                 </a>
 
                 <!-- NAVBAR LINKS -->
-                <a href="/quizard" class="navbar-item">
-                    Dashboard
-                </a>
-
                 <a href="/quizard/quizzes/new" class="navbar-item">
                     Create
                 </a>
@@ -131,7 +127,7 @@
             <!-- END LEFT PARENT TILE -->
 
             <!-- RIGHT PARENT TILE -->
-            <div class="tile is-parent">
+            <div class="tile is-parent" style="margin-left:10px;">
 
                 <!-- RIGHT CHILD TILE -->
                 <div class="tile is-child">

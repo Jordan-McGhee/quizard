@@ -45,15 +45,11 @@
                 <a href="/quizard/user/{{user.username}}"><img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture"></a>
 
 
-                <a href="/quizard/user/{{user.username}}" class="navbar-item">
+                <a href="/quizard/user/{{user.username}}" class="navbar-item" id="nav-username">
                     {{user.username}}
                 </a>
 
                 <!-- NAVBAR LINKS -->
-                <a href="/quizard" class="navbar-item">
-                    Dashboard
-                </a>
-
                 <a href="/quizard/quizzes/new" class="navbar-item">
                     Create
                 </a>
@@ -78,8 +74,6 @@
         <!-- QUIZ -->
         <div class="quiz-information">
             <h2 id="quiz-name">{{quiz.name}}</h2>
-            <!-- <h2>Recent Score: {{score}} </h2>
-            <h2>Attempts: {{quiz.taken_by.count}} </h2> -->
         </div>
 
         <!-- QUIZ CAROUSEL -->
@@ -95,7 +89,7 @@
                 <!-- QUIZ FORM -->
                 <form action="/quizard/quizzes/{{quiz.id}}/mark_quiz" method='POST'>
                     {% csrf_token %}
-                    <p>{{question.entry}}</p>
+                    <p id="question">{{question.entry}}</p>
                     <p><input type="text" name="question{{forloop.counter}}" id="answer-input"></p>
             </div>
             {% endfor %}
