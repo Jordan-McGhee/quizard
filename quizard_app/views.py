@@ -334,7 +334,7 @@ def mark_quiz(request,quiz_id):
         quiz_category_word = Quiz.category_choices[quiz_category_num][1]
         
         for i,question in enumerate(quiz.questions.all()):
-            if question.answer == request.POST[f'question{i+1}']:
+            if question.answer.lower() == request.POST[f'question{i+1}'].lower():
                 count += 1
 
         # MEASURES LIKES VS TOTAL LIKES/DISLIKES OF A QUIZ AS A PERCENTAGE
@@ -348,7 +348,6 @@ def mark_quiz(request,quiz_id):
         "quiz_category": quiz_category_word,
         'score': str(count/length_of_quiz*100),
         'user': user,
-        'popularity': popularity
         }
 
         return render(request, 'view_quiz.html',context)
@@ -356,14 +355,6 @@ def mark_quiz(request,quiz_id):
 
 
 # FLASHCARDS
-def create_flashcard(request,quiz_id):
-    pass
-
-def edit_flashcard(request,quiz_id,flashcard_id):
-    pass
-
-def update_flashcard(request,quiz_id,flashcard_id):
-    pass
 
 def delete_flashcard(request,quiz_id,flashcard_id):
     if request.method == "POST":

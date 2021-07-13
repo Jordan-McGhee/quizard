@@ -37,8 +37,5 @@ urlpatterns = [
     path('quizard/quizzes/<int:quiz_id>/mark_quiz',views.mark_quiz),
 
     # FLASHCARDS
-    path('quizard/quizzes/<int:quiz_id>/flashcard/new', views.create_flashcard),
-    path('quizard/quizzes/<int:quiz_id>/flashcard/<int:flashcard_id>/edit', views.edit_flashcard),
-    path('quizard/quizzes/<int:quiz_id>/flashcard/<int:flashcard_id>/update', views.update_flashcard),
     path('quizard/quizzes/<int:quiz_id>/flashcard/<int:flashcard_id>/destroy', views.delete_flashcard)
 ]
