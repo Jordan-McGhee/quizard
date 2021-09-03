@@ -9,7 +9,7 @@ Quizard is a Quizlet clone, designed for users to create their own quizzes to fi
 - Dashboard that can be filtered by quiz category
 - Grading system after a quiz is completed
 - Users can favorite and like or dislike a quiz
-- Favorited quizes will show up on user profile along with quizzes they've created
+- Favorited quizzes will show up on user profile along with quizzes they've created
 
 ## Demo
 
